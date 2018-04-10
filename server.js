@@ -26,56 +26,22 @@ app.use(function(err, req, res, next) {
   if (err.name === 'JsonSchemaValidation') {
       // Log the error however you please 
       console.log(err.message);
-      // logs "express-jsonschema: Invalid data found" 
 
       // Set a bad request http response status or whatever you want 
       res.status(400);
 
-      // Format the response body however you want 
+      // Response body
       responseData = {
          statusText: 'Bad Request',
          jsonSchemaValidation: true,
-         validations: err.validations  // All of your validation information 
+         validations: err.validations  // All of the validation information 
       };
+      
+      //Send information about where the request failed at, eg. missing data
+      res.json(responseData.validations.body[0].property + " : " + responseData.validations.body[0].messages);
 
-      // Take into account the content type if your app serves various content types 
-      if (req.xhr || req.get('Content-Type') === 'application/json') {
-        res.json(responseData.validations.body);
-      } else {
-          // If this is an html request then you should probably have 
-          // some type of Bad Request html template to respond with 
-          //res.render('badrequestTemplate', responseData);
-          res.json(responseData.validations.body[0].property + " : " + responseData.validations.body[0].messages);
-      }
   } else {
       // pass error to next error middleware handler 
       next(err);
   }
 });
-
-
-/**
- * exit handling - the exitHandler function is called when the events are fired.
- */
-function exitHandler(process, event, err) {
-  console.warn(`Event ${event.type} received. ${err}`);
-
-  // closeDB Connection if present
-  const db = require('./db.js').db;
-  db.close()
-  .catch(function (err) {
-    console.error('Could not close DB Connection');
-    console.error(err);
-  })
-  .then(function () {
-    if(event.exit) {
-      console.log('Shutting down app on http:localhost:' + port);
-      process.exit();
-    }
-  });
-}
-
-// Catches ctrl+c event
-process.on('SIGINT', exitHandler.bind(null, process, { exit: true, type: 'SIGINT' }));
-// Catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null, process, { exit: false, type: 'uncaughtException' }));
