@@ -1,0 +1,26 @@
+{
+  "name": "wobi",
+  "version": "1.0.0",
+  "description": "This is a simple world and character builder intended as a writers resource to make sense of their ideas for more complex writing projects.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "writing",
+    "resource",
+    "webeng",
+    "uni_project"
+  ],
+  "author": "Alex Schaefer",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-jsonschema": "^1.1.6",
+    "tingodb": "^0.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
