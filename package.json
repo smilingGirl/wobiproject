@@ -21,9 +21,10 @@
     "tingodb": "^0.5.1"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.10.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.2",
-    "gulp-nodemon": "^2.2.1",
-    "gulp-shell": "^0.6.5"
+    "gulp-nodemon": "^2.2.1"
   }
 }
