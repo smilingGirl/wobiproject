@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var del = require('del');
 var log = require('fancy-log');
-var nodemon = require('gulp-nodemon');
+//var nodemon = require('gulp-nodemon');
 var eslint = require('gulp-eslint');
 var exec = require('child_process').exec;
 
@@ -37,7 +37,7 @@ gulp.task('watch', function() {
 
 // Install production dependencies
 gulp.task(('installNpmDependencies'), function(cb) {
-  exec('npm install --production', function (err, stdout, stderr) {
+  exec('npm install', function (err, stdout, stderr) {
     log(stdout);
     log.error(stderr);
     cb(err);

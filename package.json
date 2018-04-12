@@ -1,11 +1,9 @@
 {
   "name": "wobi",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "This is a simple world and character builder intended as a writers resource to make sense of their ideas for more complex writing projects.",
   "main": "index.js",
-  "scripts": {
-    "dev": "nodemon server.js"
-  },
+  "scripts": {},
   "keywords": [
     "writing",
     "resource",
@@ -25,6 +23,9 @@
     "eslint-plugin-import": "^2.10.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.2",
+    "safe-buffer": "^5.1.1"
+  },
+  "notUsedRn": {
     "gulp-nodemon": "^2.2.1"
   }
 }
