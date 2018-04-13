@@ -14,18 +14,18 @@ schemas.World = {
             null,
         ],
     },
-    /*countries:{
+    countries:{
         type: "array",
         items:{
-          $ref: "#/schemas.Country"
-        }
+            type: "number",
+        },
     },
     cultures:{
         type: "array",
         items: {
-            $ref: "#/schemas.Culture"
-        }          
-    },*/
+            type: "number",
+        },          
+    },
     history:{
         type: "array",
         items: {
@@ -69,12 +69,12 @@ schemas.Character = {
         maxLength: 50,
       },
       age: {
-        type: 'integer',
+        type: 'number',
         maxLength: 3,
       },
-      /*culture: {
-        $ref: "#/schemas.Culture"
-      },*/
+      culture: {
+        type: "number",
+      },
       status: {
         type: 'string',
         required: true,
@@ -165,13 +165,13 @@ schemas.Country = {
       cultures:{
         type: "array",
         items: {
-            $ref: "#/schemas.Culture",
+            type: "number",
         },     
       },
       neighbours:{
         type: "array",
         items: {
-            $ref: "#/schemas.Counties",
+            type: "number",
         },
       },
       holiday:{
