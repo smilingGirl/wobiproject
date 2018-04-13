@@ -10,13 +10,13 @@ function init(app, cs) {
   app.post('/:worldID/characters', validate({ body: schema.Character }), postCharacter);
   log.info(`*** API [POST] /:world/characters registered`);
 
-  app.put('/:worldID/characters/:characterID', putCharacter);
+  app.put('/:worldID/characters/:characterID', validate({ body: schema.Character }), putCharacter);
   log.info(`*** API [PUT] /:world/characters/:characterID registered`);
 
   app.delete('/:worldID/characters/:characterID', deleteCharacter);
   log.info(`*** API [DELETE] /:world/characters/:characterID registered`);
 
-  app.get('/:worldID/characters/:characterID', validate({ body: schema.Character }), getCharacterById);
+  app.get('/:worldID/characters/:characterID', getCharacterById);
   log.info(`*** API [GET] /:world/characters/:characterID registered`);
 }
 
@@ -45,7 +45,14 @@ function getCharacterById(req, res) {
 }
 
 function putCharacter(req, res) {
-	const character = {firstName: req.body.firstName, lastName: req.body.lastName, age: req.body.age, type: 'character', worldId: req.body.worldID };
+	const character = {
+		firstName: req.body.firstName, 
+		lastName: req.body.lastName, 
+		age: req.body.age, 
+		type: 'character', 
+		worldId: req.body.worldID,
+		culture: req.body.culture, 
+	};
 	cs.updateCharacter(req.params.worldID, req.params.characterID, character)
 	.then(function (character) {
 		//logger.debug(util.format('POST /calendar/%s/events - 200 - %j', req.userId, event));
@@ -58,7 +65,14 @@ function putCharacter(req, res) {
 }
 
 function postCharacter(req, res) {
-	const character = {firstName: req.body.firstName, lastName: req.body.lastName, age: req.body.age, type: 'character', worldId: req.body.worldID};
+	const character = {
+		firstName: req.body.firstName, 
+		lastName: req.body.lastName, 
+		age: req.body.age, 
+		type: 'character', 
+		worldId: req.body.worldID,
+		culture: req.body.culture, 
+	};
 	cs.addCharacter(req.params.worldID, character)
 	.then(function (character) {
 		//logger.debug(util.format('POST /calendar/%s/events - 200 - %j', req.userId, event));
