@@ -1,5 +1,6 @@
 var express = require('express');
-var db = require('../../db.js').db;
+var db = require('../../db').db;
+var log = require('fancy-log');
 
 var router = express.Router();
 
@@ -18,10 +19,13 @@ exports.getWorlds = function() {
     var query = {
       type: 'world',
     };
-    wobiCol.find(query).toArray(function (error, list) {
-      list.forEach(function (part, index, theArray) {
-        theArray[index] = part; // eslint-disable-line no-param-reassign
-      });
+    wobiCol.find(query).toArray(function (error, list)  {
+      log(list);
+      if (typeof list !== 'undefined') {
+        list.forEach(function (part, index, theArray) {
+          theArray[index] = part;
+        });
+      }
 
       resolve(list);
     });

@@ -8,9 +8,9 @@ var exec = require('child_process').exec;
 //Start nodemon for development
 gulp.task('nodemon', function() {
   nodemon({
-    script: 'src/server.js',
+    script: './src/server.js',
     ext: 'js',
-    ignore: ['dist/']
+    ignore: ['dist/'],
   })
   .on('restart', function() {
     log.warn('>> node restart');

@@ -32,7 +32,7 @@ function getWorlds(req, res) {
 	})
 	.catch(function(err) {
 		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-		res.status(500).send('Failed to update world %s' + err);
+		res.status(500).send('Failed to fetch worlds %s' + err);
 	});
 }
 
@@ -44,7 +44,7 @@ function getWorldById(req, res) {
 	})
 	.catch(function(err) {
 		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-		res.status(500).send('Failed to update world %s' + err);
+		res.status(500).send('Failed to fetch world %s' + err);
 	});
 }
 
@@ -83,7 +83,7 @@ function deleteWorld(req, res){
 	})
 	.catch(function(err) {
 		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-		res.status(500).send('Failed to update delete. ' + err);
+		res.status(500).send('Failed to delete. ' + err);
 	});
 }
 

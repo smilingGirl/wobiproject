@@ -1,6 +1,7 @@
 var http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
+var db = require('./db.js').db;
 var log = require('fancy-log');
 
 //Make some settings and create 'app'
@@ -14,7 +15,7 @@ require('./lib/api/index.js')(app, {});
 
 //start the http-server on port defined in config
 app.listen(port, () => {
-  log.message('We are live on http:localhost:' + port);
+  log('We are live on http:localhost:' + port);
 });
 
 //Basic Handler to handle SchemaValdiation Fails
