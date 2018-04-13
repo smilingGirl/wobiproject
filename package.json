@@ -23,6 +23,7 @@
     "eslint-plugin-import": "^2.10.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.2",
+    "gulp-nodemon": "^2.2.1",
     "safe-buffer": "^5.1.1"
   },
   "notUsedRn": {

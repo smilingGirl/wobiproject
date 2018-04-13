@@ -1,26 +1,26 @@
 var gulp = require('gulp');
 var del = require('del');
 var log = require('fancy-log');
-//var nodemon = require('gulp-nodemon');
+var nodemon = require('gulp-nodemon');
 var eslint = require('gulp-eslint');
 var exec = require('child_process').exec;
 
-// Task to start nodemon as a development tool
+//Start nodemon for development
 gulp.task('nodemon', function() {
   nodemon({
     script: 'src/server.js',
     ext: 'js',
-    ignore: ['dist/'],
+    ignore: ['dist/']
   })
   .on('restart', function() {
-    log.info('>> node restart');
+    console.log('>> node restart');
   })
 });
 
 // Cleanup
-function clean() {
+gulp.task(('clean'),function() {
   return del(['build']);
-}
+});
 
 // configure a eslint task to validate all src files
 gulp.task('eslint', function() {
@@ -30,7 +30,8 @@ gulp.task('eslint', function() {
     .pipe(eslint.failAfterError());
 });
 
-// configure to watch all src js files to be checked with the eslint task
+// configure to watch all src js files
+// on change the eslint task is called
 gulp.task('watch', function() {
   gulp.watch('src/**/*.js', ['eslint']);
 });
@@ -44,9 +45,7 @@ gulp.task(('installNpmDependencies'), function(cb) {
   });
 });
 
-//var installDependencies = gulp.series(installNpmDependencies);
-
 // Task definition
-gulp.task('build', null, clean/* codeValidation, gulp.parallel(codeCompilation, codeDocumentation)*/);
+gulp.task('build', ['eslint', 'clean']);
 gulp.task('install',['installNpmDependencies', 'build']);
 gulp.task('default', ['build']);

@@ -14,9 +14,6 @@ require('./lib/api/index.js')(app, {});
 //start the http-server on port defined in config
 app.listen(port, () => {
   console.log('We are live on http:localhost:' + port);
-  /*db.collection('WoBiCol').findOne({'title':'SomeWorld'}, function(err, item) {
-      console.log(item);
-  });*/
 });
 
 //Basic Handler to handle SchemaValdiation Fails
