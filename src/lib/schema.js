@@ -46,10 +46,10 @@ schemas.World = {
                         'string',
                         null,
                     ],
-                }                    
-            }
-        }
-    }
+                },                    
+            },
+        },
+    },
   },
 };
 
@@ -80,7 +80,7 @@ schemas.Character = {
         required: true,
         enum: [
           'Alive',
-          'Dead'
+          'Dead',
         ],
       },
     },
@@ -108,9 +108,9 @@ schemas.Culture = {
                         'string',
                         null,
                     ],
-                }                    
-            }
-        }
+                },                
+            },
+        },
     },
         holiday:{
             type: "array",
@@ -126,9 +126,9 @@ schemas.Culture = {
                             'string',
                             null,
                         ],
-                    }                    
-                }
-            }
+                    },                    
+                },
+            },
         },
         value:{
             type: "array",
@@ -144,9 +144,9 @@ schemas.Culture = {
                             'string',
                             null,
                         ],
-                    }                    
-                }
-            }
+                    },                    
+                },
+            },
         },      
     },
 };
@@ -160,19 +160,19 @@ schemas.Country = {
         maxLength: 50,
       },
       system:{
-          type: 'string'
+          type: 'string',
       },
       cultures:{
         type: "array",
         items: {
-            $ref: "#/schemas.Culture"
-        }          
+            $ref: "#/schemas.Culture",
+        },     
       },
       neighbours:{
         type: "array",
         items: {
-            $ref: "#/schemas.Counties"
-        }
+            $ref: "#/schemas.Counties",
+        },
       },
       holiday:{
             type: "array",
@@ -188,9 +188,9 @@ schemas.Country = {
                             'string',
                             null,
                         ],
-                    }                    
-                }
-            }
+                    },                    
+                },
+            },
         },
         value:{
             type: "array",
@@ -206,9 +206,9 @@ schemas.Country = {
                             'string',
                             null,
                         ],
-                    }                    
-                }
-            }
+                    },                   
+                },
+            },
         },      
     },
   };

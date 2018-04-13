@@ -1,14 +1,15 @@
 const cs = require('../services/countryService.js');
 var validate = require('express-jsonschema').validate;
 var schema = require('../schema.js');
+var log = require('fancy-log');
 
 function init(app, ws) {
   app.get('/:worldID/countries', getCountries);
-  console.log(`*** API [GET] /:world/countries registered`);
+  log.info(`*** API [GET] /:world/countries registered`);
   app.post('/:worldID/countries', validate({ body: schema.Country }), postCountry);
-  console.log(`*** API [POST] /:world/countries registered`);
+  log.info(`*** API [POST] /:world/countries registered`);
   app.get('/:worldID/countries/:countryID', getCountryById);
-  console.log(`*** API [GET] /:world/countries/:countryID registered`);
+  log.info(`*** API [GET] /:world/countries/:countryID registered`);
 }
 
 function getCountries(req, res) {
@@ -30,7 +31,7 @@ function postCountry(req, res) {
 		ruler: req.body.ruler, 
 		system: req.body.system, 
 		type: 'country', 
-		worldId: req.body.worldID
+		worldId: req.body.worldID,
 	};
 	cs.addCountry(req.params.worldID, country)
 	.then(function (country) {
@@ -38,8 +39,8 @@ function postCountry(req, res) {
 		res.json(country);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to create character. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to create character. ' + err);
 	});
 }
 
@@ -50,8 +51,8 @@ function getCountryById(req, res) {
 		res.json(country);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update character. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update character. ' + err);
 	});
 }
 

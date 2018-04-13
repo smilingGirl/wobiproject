@@ -18,7 +18,7 @@ exports.getCountries = function(worldId) {
       var wobiCol = db.collection('WoBiCol');
       var query = {
         type: 'country',
-        worldId: worldId
+        worldId: worldId,
       };
       wobiCol.find(query).toArray(function (error, list) {
         list.forEach(function (part, index, theArray) {
@@ -64,7 +64,7 @@ exports.getCountryById = function(worldId, countryId) {
       var query = {
         _id: countryId,
         type: 'country',
-        worldId: worldId
+        worldId: worldId,
       };
       wobiCol.findOne(query, function (error, item) {
         resolve(item);

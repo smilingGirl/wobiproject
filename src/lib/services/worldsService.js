@@ -16,7 +16,7 @@ exports.getWorlds = function() {
   return new Promise(function (resolve, reject) {
     var wobiCol = db.collection('WoBiCol');
     var query = {
-      type: 'world'
+      type: 'world',
     };
     wobiCol.find(query).toArray(function (error, list) {
       list.forEach(function (part, index, theArray) {

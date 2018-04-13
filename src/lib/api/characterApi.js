@@ -1,22 +1,23 @@
 const cs = require('../services/characterService.js');
 var validate = require('express-jsonschema').validate;
 var schema = require('../schema.js');
+var log = require('fancy-log');
 
 function init(app, cs) {
   app.get('/:worldID/characters', getCharacters);
-  console.log(`*** API [GET] /:world/characters registered`);
+  log.info(`*** API [GET] /:world/characters registered`);
 
   app.post('/:worldID/characters', validate({ body: schema.Character }), postCharacter);
-  console.log(`*** API [POST] /:world/characters registered`);
+  log.info(`*** API [POST] /:world/characters registered`);
 
   app.put('/:worldID/characters/:characterID', putCharacter);
-  console.log(`*** API [PUT] /:world/characters/:characterID registered`);
+  log.info(`*** API [PUT] /:world/characters/:characterID registered`);
 
   app.delete('/:worldID/characters/:characterID', deleteCharacter);
-  console.log(`*** API [DELETE] /:world/characters/:characterID registered`);
+  log.info(`*** API [DELETE] /:world/characters/:characterID registered`);
 
   app.get('/:worldID/characters/:characterID', validate({ body: schema.Character }), getCharacterById);
-  console.log(`*** API [GET] /:world/characters/:characterID registered`);
+  log.info(`*** API [GET] /:world/characters/:characterID registered`);
 }
 
 function getCharacters(req, res) {
@@ -38,8 +39,8 @@ function getCharacterById(req, res) {
 		res.json(character);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update character. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update character. ' + err);
 	});
 }
 
@@ -51,8 +52,8 @@ function putCharacter(req, res) {
 		res.json(character);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update character. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update character. ' + err);
 	});
 }
 
@@ -64,8 +65,8 @@ function postCharacter(req, res) {
 		res.json(character);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to create character. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to create character. ' + err);
 	});
 }
 
@@ -76,8 +77,8 @@ function deleteCharacter(req, res){
 		res.json('Character has been deleted.');
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to delete. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to delete. ' + err);
 	});
 }
 

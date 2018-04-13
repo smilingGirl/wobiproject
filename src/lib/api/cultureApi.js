@@ -1,14 +1,14 @@
 const cs = require('../services/cultureService.js');
 var validate = require('express-jsonschema').validate;
 var schema = require('../schema.js');
+var log = require('fancy-log');
 
 function init(app, ws) {
   app.get('/:worldID/cultures', getCultures);
-  console.log(`*** API [GET] /:world/cultures registered`);
+  log.info(`*** API [GET] /:world/cultures registered`);
   app.post('/:worldID/cultures', validate({ body: schema.Culture }), postCultures);
-  console.log(`*** API [POST] /:world/cultures registered`);
-  app.get('/:worldID/cultures/:cultureID', getCultureById);
-  console.log(`*** API [GET] /:world/cultures/:cultureID registered`);
+  log.info(`*** API [POST] /:world/cultures registered`);
+  log.info(`*** API [GET] /:world/cultures/:cultureID registered`);
 }
 
 function getCultures(req, res) {
@@ -30,7 +30,7 @@ function postCultures(req, res) {
 		holidays: req.body.holidays, 
 		values: req.body.values, 
 		type: 'culture', 
-		worldId: req.body.worldID
+		worldId: req.body.worldID,
 	};
 	cs.addCulture(req.params.worldID, culture)
 	.then(function (culture) {
@@ -38,8 +38,8 @@ function postCultures(req, res) {
 		res.json(culture);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to create character. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to create character. ' + err);
 	});
 }
 
@@ -50,8 +50,8 @@ function getCultureById(req, res) {
 		res.json(culture);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update character. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update character. ' + err);
 	});
 }
 

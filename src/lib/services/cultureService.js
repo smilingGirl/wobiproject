@@ -18,7 +18,7 @@ exports.getCultures = function(worldId) {
       var wobiCol = db.collection('WoBiCol');
       var query = {
         type: 'culture',
-        worldId: worldId
+        worldId: worldId,
       };
       wobiCol.find(query).toArray(function (error, list) {
         list.forEach(function (part, index, theArray) {
@@ -65,7 +65,7 @@ exports.getCultureById = function(worldId, cultureId) {
       var query = {
         _id: cultureId,
         type: 'culture',
-        worldId: worldId
+        worldId: worldId,
       };
       wobiCol.findOne(query, function (error, item) {
         resolve(item);

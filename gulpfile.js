@@ -13,7 +13,7 @@ gulp.task('nodemon', function() {
     ignore: ['dist/']
   })
   .on('restart', function() {
-    console.log('>> node restart');
+    log.warn('>> node restart');
   })
 });
 

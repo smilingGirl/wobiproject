@@ -1,6 +1,7 @@
 var http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
+var log = require('fancy-log');
 
 //Make some settings and create 'app'
 //Export into config file later on 
@@ -13,7 +14,7 @@ require('./lib/api/index.js')(app, {});
 
 //start the http-server on port defined in config
 app.listen(port, () => {
-  console.log('We are live on http:localhost:' + port);
+  log.message('We are live on http:localhost:' + port);
 });
 
 //Basic Handler to handle SchemaValdiation Fails
@@ -22,7 +23,7 @@ app.use(function(err, req, res, next) {
 
   if (err.name === 'JsonSchemaValidation') {
       // Log the error however you please 
-      console.log(err.message);
+      log.error(err.message);
 
       // Set a bad request http response status or whatever you want 
       res.status(400);
@@ -31,7 +32,7 @@ app.use(function(err, req, res, next) {
       responseData = {
          statusText: 'Bad Request',
          jsonSchemaValidation: true,
-         validations: err.validations  // All of the validation information 
+         validations: err.validations,  // All of the validation information 
       };
       
       //Send information about where the request failed at, eg. missing data

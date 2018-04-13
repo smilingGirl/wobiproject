@@ -1,26 +1,27 @@
 const ws = require('../services/worldsService.js');
 var validate = require('express-jsonschema').validate;
 var schema = require('../schema.js');
+var log = require('fancy-log');
 
 function init(app, ws) {
   //Get all existing worlds
   app.get('/worlds', getWorlds);
-  console.log(`*** API [GET] /worlds registered`);
+  log.info(`*** API [GET] /worlds registered`);
 
   //Post a new world
   app.post('/worlds', validate({ body: schema.World }),  postWorld);
-  console.log(`*** API [POST] /worlds registered`);
+  log.info(`*** API [POST] /worlds registered`);
 
   //Get world by worldID
   app.get('/worlds/:worldID', getWorldById);
-  console.log(`*** API [GET] /worlds/:worldID registered`);
+  log.info(`*** API [GET] /worlds/:worldID registered`);
 
   //Update an existing world
   app.put('/worlds/:worldID', validate({ body: schema.World }), putWorld);
-  console.log(`*** API [PUT] /worlds/:worldID registered`);
+  log.info(`*** API [PUT] /worlds/:worldID registered`);
 
   app.delete('/worlds/:worldID', deleteWorld);
-  console.log(`*** API [DELETE] /worlds/:worldID registered`);
+  log.info(`*** API [DELETE] /worlds/:worldID registered`);
 }
 
 function getWorlds(req, res) {
@@ -30,8 +31,8 @@ function getWorlds(req, res) {
 		res.json(worlds);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update world %s' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update world %s' + err);
 	});
 }
 
@@ -42,8 +43,8 @@ function getWorldById(req, res) {
 		res.json(world);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update world %s' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update world %s' + err);
 	});
 }
 
@@ -55,8 +56,8 @@ function putWorld(req, res) {
 		res.json(world);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update world %s' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update world %s' + err);
 	});
 }
 
@@ -69,8 +70,8 @@ function postWorld(req, res) {
 		res.json(world);
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to create world %s' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to create world %s' + err);
 	});
 }
 
@@ -81,8 +82,8 @@ function deleteWorld(req, res){
 		res.json('World has been deleted.');
 	})
 	.catch(function(err) {
-	   //logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
-	   res.status(500).send('Failed to update delete. ' + err);
+		//logger.debug(util.format('POST /calendar/%s/events - 500', req.userId));
+		res.status(500).send('Failed to update delete. ' + err);
 	});
 }
 

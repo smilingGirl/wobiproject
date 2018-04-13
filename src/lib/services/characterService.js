@@ -18,7 +18,7 @@ exports.getCharacters = function(worldId) {
     var wobiCol = db.collection('WoBiCol');
     var query = {
       type: 'character',
-      worldId: worldId
+      worldId: worldId,
     };
     wobiCol.find(query).toArray(function (error, list) {
       list.forEach(function (part, index, theArray) {
@@ -64,7 +64,7 @@ exports.getCharacterById = function(worldId, characterId) {
     var query = {
       _id: characterId,
       type: 'character',
-      worldId: worldId
+      worldId: worldId,
     };
     wobiCol.findOne(query, function (error, item) {
       resolve(item);
@@ -84,7 +84,7 @@ exports.removeCharacter = function(worldId, characterId) {
     var query = {
       _id: characterId,
       type: 'character',
-      worldId: worldId
+      worldId: worldId,
     };
     wobiCol.remove(query, function (error, item) {
       resolve();
@@ -106,7 +106,7 @@ exports.updateCharacter = function(worldId, characterId, character) {
     var query = {
       _id: characterId,
       worldId: worldId,
-      type: 'character'
+      type: 'character',
     };
 
     // Add the World ID as a property for later lookup
