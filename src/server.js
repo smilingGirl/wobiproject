@@ -12,13 +12,16 @@ const port = 8080;
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/js', express.static(__dirname + '../node_modules/bootstrap/dist/js')); // redirect bootstrap JS
-app.use('/css', express.static(__dirname + '../node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
+log(express.static(__dirname + '../node_modules/bootstrap/dist/js'));
+
+app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js'))); // redirect bootstrap JS
+app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css'))); // redirect CSS bootstrap
 
 require('./lib/api/index.js')(app, {});
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, './../frontend/index.html')); // load the single view file (angular will handle the page changes on the front-end)
+  // load the single view file (angular will handle the page changes on the front-end)
+  res.sendFile(path.join(__dirname, '../frontend/index.html')); 
 });
 
 //start the http-server on port defined in config
