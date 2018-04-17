@@ -2,6 +2,7 @@ var http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 var db = require('./db.js').db;
+var path = require('path');
 var log = require('fancy-log');
 
 //Make some settings and create 'app'
@@ -11,7 +12,14 @@ const port = 8080;
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use('/js', express.static(__dirname + '../node_modules/bootstrap/dist/js')); // redirect bootstrap JS
+app.use('/css', express.static(__dirname + '../node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
+
 require('./lib/api/index.js')(app, {});
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, './../frontend/index.html')); // load the single view file (angular will handle the page changes on the front-end)
+});
 
 //start the http-server on port defined in config
 app.listen(port, () => {
