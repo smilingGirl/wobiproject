@@ -1,97 +1,89 @@
 <!DOCTYPE html>
 <html lang="en" ng-app>
-  <head>
-    <meta charset="utf-8">
-    <title>wobi -Your World Builder</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-  </head>
 
-  <body ng-controller="mainController">
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-      <a class="navbar-brand" href="#">Worlds</a>
-    </nav>
+<head>
+  <meta charset="utf-8">
+  <title>wobi -Your World Builder</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
 
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Characters <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Countries</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Cultures</a>
-            </li>
-          </ul>
+<body>
+  <nav class="navbar navbar-expand-md navbar-inverse bg-inverse">
+    <a class="navbar-brand" href="#">wobi World Builder</a>
 
-  
-        </nav>
-
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-          <h1>Overview</h1>
-
-          <section class="row text-center placeholders">
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <div class="text-muted">Something else</div>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </section>
-
-          <h2>Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </main>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarst">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Help</a>
+        </li>
+      </ul>
     </div>
-  </body>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Info
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Character</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cultures</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Countries</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="col-sm-9 col-md-9 pt-3">
+        <h1>Info</h1>
+        <section class="row">
+          <div class="col">
+              <button type="button" class="btn btn-success">New</button>
+            </div>
+        </section>
+
+        <div class="list-responsive row col-sm-12 col-md-12">
+            <ul class="list-group-flush col-sm-5 col-md-3">
+                <li class="list-group-item">
+                    <a class="" href="#">Anna</a>
+                  </li>
+                <li class="list-group-item">
+                  <a class="" href="#">Berta</a>
+                </li>
+            </ul> 
+          <div class="col-sm-7 col-md-9">
+              <h3>About</h3>
+              <div class="container text-right">
+                  <button type="button" class="btn btn-danger">Delete</button>
+                  <button type="button" class="btn btn-light">Edit</button>
+              </div>
+              
+          </div>
+      </div> 
+                  
+      </div>
+      </main>
+    </div>
 
 </body>
 </html>
-
