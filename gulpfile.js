@@ -24,7 +24,7 @@ gulp.task(('clean'),function() {
 
 // configure a eslint task to validate all src files
 gulp.task('eslint', function() {
-  return gulp.src('src/**/*.js')
+  return gulp.src('server/**/*.js')
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
