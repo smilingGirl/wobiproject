@@ -8,7 +8,7 @@ var exec = require('child_process').exec;
 //Start nodemon for development
 gulp.task('nodemon', function() {
   nodemon({
-    script: './src/server.js',
+    script: './server/server.js',
     ext: 'js',
     ignore: ['dist/'],
   })
@@ -33,7 +33,7 @@ gulp.task('eslint', function() {
 // configure to watch all src js files
 // on change the eslint task is called
 gulp.task('watch', function() {
-  gulp.watch('src/**/*.js', ['eslint']);
+  gulp.watch('server/**/*.js', ['eslint']);
 });
 
 // Install production dependencies
