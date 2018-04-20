@@ -1,3 +1,4 @@
+// Get dependencies
 var http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -10,24 +11,35 @@ var log = require('fancy-log');
 const port = 8080;
 
 const app = express();
+
+// Parsers for POST data
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-log(express.static(__dirname + '../node_modules/bootstrap/dist/js'));
+// Point static path to dist
+app.use(express.static(path.join(__dirname, '../dist')));
 
-app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js'))); // redirect bootstrap JS
-app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css'))); // redirect CSS bootstrap
-
+// Set api routes
 require('./lib/api/index.js')(app, {});
 
-app.get('*', function(req, res) {
-  // load the single view file (angular will handle the page changes on the front-end)
-  res.sendFile(path.join(__dirname, '../frontend/index.html')); 
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 //start the http-server on port defined in config
-app.listen(port, () => {
-  log('We are live on http:localhost:' + port);
-});
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+const server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port, () => log('We are live on http:localhost:  ${port}'));
+
 
 //Basic Handler to handle SchemaValdiation Fails
 app.use(function(err, req, res, next) {

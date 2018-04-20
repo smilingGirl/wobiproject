@@ -5,6 +5,15 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
+// Define the routes
+const ROUTES = [
+  {
+    path: '',
+    redirectTo: 'worlds',
+    pathMatch: 'full'
+  }
+];
+
 @NgModule({
   declarations: [
     AppComponent
