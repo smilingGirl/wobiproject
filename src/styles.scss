@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100%;
+}
+
+/*Make it a dark theme*/
+.container-fluid {
+    background-color: lightgray;
+    padding-top: 3%;
+    min-height: 100%;
+}
+
+/*Adjust navbars, side and top, to go with dark theme*/
+.sidebar 
+    &.nav-link {
+        &.active {
+            background-color: darkgray;
+        }
+    }
+}
+
+.navbar {
+    background-color: gray;
+}
+
+.navbar a {
+    color: firebrick;
+    font-weight: bold;
+    &:hover {
+        color: black;
+    }
+}
+
+a {
+    color: firebrick;
+    &:hover {
+        color: black;
+    }
+}
+
+/*Adjust list view to fit dark theme*/
+.list-group-item {
+    background-color: lightgray;
+}
+
+.list-responsive {
+    padding-top: 2%;
+}
