@@ -12,7 +12,7 @@ html, body {
 }
 
 /*Adjust navbars, side and top, to go with dark theme*/
-.sidebar 
+.sidebar {
     &.nav-link {
         &.active {
             background-color: darkgray;
