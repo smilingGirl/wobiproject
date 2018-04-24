@@ -1,6 +1,6 @@
+<!--Top navigation-->
 <nav class="navbar navbar-expand-md navbar-inverse bg-inverse">
   <a class="navbar-brand" href="#">WoBi</a>
-
   <div class="collapse navbar-collapse" id="navbarst">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -18,8 +18,10 @@
   </div>
 </nav>
 
+<!--Main stage. Everything beneith top nav-->
 <div class="container-fluid">
   <div class="row">
+    <!--Side navigation-->
     <nav class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
@@ -39,8 +41,10 @@
       </ul>
     </nav>
 
+    <!--Main working area. Create new. Select  available. Get information. Edit. Delete.-->
     <main class="col-sm-9 col-md-9 pt-3">
       <h1>Info</h1>
+      <!--Create new section-->
       <section class="row">
         <div class="col">
           <button type="button" class="btn btn-success btn-md">New</button>
@@ -48,6 +52,7 @@
       </section>
 
       <div class="list-responsive row col-sm-12 col-md-12">
+        <!--List of available characters/countries/cultures-->
         <ul class="list-group-flush col-sm-5 col-md-3">
           <li class="list-group-item">
             <a class="" href="#">Anna</a>
@@ -56,14 +61,16 @@
             <a class="" href="#">Berta</a>
           </li>
         </ul>
+
+        <!--Area to display information about the selected element-->
         <div class="col-sm-7 col-md-9">
           <h3>About</h3>
           <div class="container text-right">
             <button type="button" class="btn btn-danger btn-sm">Delete</button>
             <button type="button" class="btn btn-light btn-sm">Edit</button>
           </div>
-
         </div>
+
       </div>
     </main>
   </div>
