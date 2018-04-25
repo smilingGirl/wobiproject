@@ -1,0 +1,24 @@
+<div class="container">
+  <form [formGroup]="wobiForm" (ngSubmit)="addPost(form.value)">
+    <div class="form-container">
+      <div>
+        <h1>My Reactive Form</h1>
+        
+        <div class="form-group row">
+          <label for="example-text-input" class="col-2 col-form-label">Text</label>
+          <div class="col-10">
+            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input" formControlName="name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="example-text-input" class="col-2 col-form-label">Description</label>
+          <div class="col-10">
+            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input" formControlName="description">
+          </div>
+        </div>
+        
+        <input type="submit" class="btn btn-success btn-sm" value="Submit Form" [disabled]="!wobiForm.valid">
+      </div>
+    </div>
+  </form>
+</div>
