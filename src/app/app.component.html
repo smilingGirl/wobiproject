@@ -47,24 +47,22 @@
       <!--Create new section-->
       <section class="row">
         <div class="col">
-          <button type="button" class="btn btn-success btn-md">New</button>
+          <button type="button" class="btn btn-success btn-md" (click)="open($event, item)">New</button>
         </div>
       </section>
 
       <div class="list-responsive row col-sm-12 col-md-12">
         <!--List of available characters/countries/cultures-->
-        <ul class="list-group-flush col-sm-5 col-md-3">
+        <ul class="list-group-flush col-sm-5 col-md-3" *ngFor="let world of worlds">
           <li class="list-group-item">
-            <a class="" href="#">Anna</a>
-          </li>
-          <li class="list-group-item">
-            <a class="" href="#">Berta</a>
+            <a class="" href="#" >{{world.id}}: {{world.name}}</a>
           </li>
         </ul>
 
         <!--Area to display information about the selected element-->
         <div class="col-sm-7 col-md-9">
           <h3>About</h3>
+          <div></div>
           <div class="container text-right">
             <button type="button" class="btn btn-danger btn-sm">Delete</button>
             <button type="button" class="btn btn-light btn-sm">Edit</button>
