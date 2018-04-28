@@ -1,39 +1,17 @@
-import { Component } from '@angular/core';
-import { WorldService } from './services/world.service';
-import * as $ from 'jquery';
+import { Component, OnInit } from '@angular/core';
 
-import { World, Country, Character, Culture } from './model/schema';
+import { BasicViewComponent } from "./basic-view/basic-view.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [WorldService]
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  worlds: World[];
+export class AppComponent implements OnInit {
 
-  constructor(private _dataService: WorldService) {
-  }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.loadWorlds();
+  ngOnInit() {
   }
-
-  private loadWorlds() {
-    this._dataService.fetchWorldEntries().subscribe(data => {
-      this.worlds = data;
-    }, error => {
-      console.log('Failed fetching events');
-    });
-  }
-
-  public addWorld(){
-    //
-  }
-
-  public openNewForm() {
-    $("#newFormModal").modal()
-  }
+  
 }
-
