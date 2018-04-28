@@ -2,34 +2,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
+
 
 import { AppComponent } from './app.component';
-import { wobiFormComponent } from './wobi-form.component';
+import { BasicViewComponent } from './basic-view/basic-view.component';
+import { wobiFormComponent } from './nedit-form/wobi-form.component';
 
 // Define the routes
-const ROUTES = [
-  {
-    path: '',
-    redirectTo: 'worlds',
-    pathMatch: 'full'
-  }
-];
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    BasicViewComponent,
     wobiFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSmartModalModule.forChild()
   ],
-  providers: [],
-  bootstrap: [
-    AppComponent,
-    wobiFormComponent
-  ]
+  providers: [NgxSmartModalService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

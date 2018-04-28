@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 // Import the Schema for World, Country, Character, Culture
-import { World, Country, Character, Culture } from './model/schema';
-import { WorldService } from './services/world.service';
+import { World, Country, Character, Culture } from '../model/schema';
+
+import { WorldService } from '../services/world.service';
 
 @Component({
   selector: 'wobi-form',
@@ -11,22 +12,22 @@ import { WorldService } from './services/world.service';
   styleUrls: ['./wobi-form.component.scss'],
   providers: [WorldService]
 })
-export class wobiFormComponent {
+
+//@Modal()
+export class wobiFormComponent implements OnInit{
   wobiForm: FormGroup;
   post:any;
   description:string = '';
   name:string = '';
   worlds: World[];
 
-  constructor(private fb: FormBuilder, private _dataService: WorldService) {
+  constructor(private _dataService: WorldService) {
     this.wobiForm = new FormGroup({
       name: new FormControl(),
       description: new FormControl()
     })
   }
 
-  addPost(post) {
-    this.description = post.description;
-    this.name = post.name;
+  ngOnInit() {
   }
 }
