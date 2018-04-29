@@ -1,29 +1,68 @@
-<ngx-smart-modal #neditFormModal [identifier]="'neditFormModal'">
+<ngx-smart-modal #neditFormModal [identifier]="'neditFormModal'" (onOpen)="getType()">
   <div class="app-modal-body">
     <form [formGroup]="wobiForm">
       <div class="form-container">
         <div>
-          <h2>My Reactive Form</h2>
+          <h2>Create New</h2>
 
           <div class="form-group row">
-            <label for="example-text-input" class="col-2 col-form-label">Text</label>
+            <label for="name-input" class="col-2 col-form-label">Name</label>
             <div class="col-10">
-              <input class="form-control" type="text" value="Artisanal kale" id="example-text-input" formControlName="name">
+              <input class="form-control" type="text" value="Shep" id="name-input" formControlName="name">
             </div>
           </div>
-          <div class="form-group row">
-            <label for="example-text-input" class="col-2 col-form-label">Description</label>
+
+          <div class="form-group row" *ngIf="type == 'character'">
+            <label for="first-namet-input" class="col-2 col-form-label">First Name</label>
             <div class="col-10">
-              <input class="form-control" type="text" value="Artisanal kale" id="example-text-input" formControlName="description">
+              <input class="form-control" type="text" value="Alina" id="first-name-input" formControlName="fname">
             </div>
           </div>
+
+          <div class="form-group row" *ngIf="type == 'character'">
+            <label for="age-input" class="col-2 col-form-label">Age</label>
+            <div class="col-10">
+              <input class="form-control" type="number" value="42" id="age-input" formControlName="age">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleSelect1">Country</label>
+            <select class="form-control" id="country" formControlName="country">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleSelect1">Culture</label>
+            <select class="form-control" id="culture" formControlName="culture">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf="type == 'character'">
+            <label for="exampleSelect1">Status</label>
+            <select class="form-control" id="status" formControlName="status">
+              <option>Alive</option>
+              <option>Dead</option>
+            </select>
+          </div>
+
+
         </div>
       </div>
     </form>
   </div>
   <div class="app-modal-footer">
     <button type="button" class="btn btn-default btn-sm" (click)="neditFormModal.close()">Close</button>
-    <input type="submit" class="btn btn-success btn-sm" value="Submit Form" >
-          <!--[disabled]="!wobiForm.valid"-->
+    <input type="submit" class="btn btn-success btn-sm" value="Submit Form" (click)="onSubmitModelBased()" [disabled]="!wobiForm.valid">
   </div>
 </ngx-smart-modal>
