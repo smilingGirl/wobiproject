@@ -26,7 +26,7 @@ export class BasicViewComponent {
     this._dataService.fetchWorldEntries().subscribe(data => {
       this.worlds = data;
     }, error => {
-      console.log('Failed fetching worlds');
+      alert('Failed fetching worlds');
     });
   }
 }
