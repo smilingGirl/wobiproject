@@ -20,6 +20,17 @@
   </div>
 </nav>
 
+<div class="row">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+  </ul>
+</div>
+
 <!--Main stage. Everything beneith top nav-->
 <div class="container-fluid">
   <div class="row">
@@ -57,7 +68,7 @@
         <!--List of available characters/countries/cultures-->
         <ul class="list-group-flush col-sm-5 col-md-3" *ngFor="let world of worlds">
           <li class="list-group-item">
-            <a class="" href="#" >{{world.id}}: {{world.name}}</a>
+            <a class="" href="#">{{world.id}}: {{world.name}}</a>
           </li>
         </ul>
 
@@ -75,5 +86,3 @@
     </main>
   </div>
 </div>
-
-
