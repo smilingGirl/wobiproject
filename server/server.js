@@ -19,6 +19,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '../dist')));
 
+app.use(function (req, res, next){
+  // Enable CORS for local testing
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  //res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Cache-Control, Pragma');
+  next();
+});
+
 // Set api routes
 require('./lib/api/index.js')(app, {});
 
