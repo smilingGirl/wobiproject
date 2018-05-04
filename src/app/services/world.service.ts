@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {World} from '../model/schema';
-//import { Http, Response } from '@angular/http';
-//import 'rxjs/add/operator/map';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
