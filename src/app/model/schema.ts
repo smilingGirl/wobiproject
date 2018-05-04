@@ -57,6 +57,13 @@ export interface World {
 export interface Character {
     type: 'object',
     properties: {
+        worldID: {
+            type: 'number',
+            required: true
+        },
+        id: {
+            type: 'number'
+        },
       firstName: {
         type: 'string',
         required: true,
