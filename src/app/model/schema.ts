@@ -97,6 +97,10 @@ export interface Character {
   export interface Culture {
     type: 'object',
     properties: {
+        worldID: {
+            type: 'number',
+            required: true
+        },
       name: {
         type: 'string',
         required: true,
@@ -162,6 +166,10 @@ export interface Character {
 export interface Country {
     type: 'object',
     properties: {
+        worldID: {
+            type: 'number',
+            required: true
+        },
       name: {
         type: 'string',
         required: true,

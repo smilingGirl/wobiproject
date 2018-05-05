@@ -1,4 +1,4 @@
-<wobi-form></wobi-form>
+<wobi-form [selectedInputCharacteristic]='selectedInputCharacteristic'></wobi-form>
 
 <!--Top navigation-->
 <nav class="navbar navbar-expand-md navbar-inverse bg-inverse">
@@ -23,63 +23,79 @@
 <div class="row">
   <ul class="nav nav-tabs" *ngFor="let world of worlds">
     <li class="nav-item">
-      <a class="nav-link" href="#" [routerLink]="['worlds', world._id]" routerLinkActive="active-link">{{world.name}}</a>
+      <a class="nav-link" href="#" [routerLink]="['worlds', world._id]" routerLinkActive="active-link" (click)="configureWorldId()">{{world.name}}</a>
     </li>
   </ul>
 </div>
 
 <!--Main stage. Everything beneith top nav-->
 <div class="container-fluid">
-    <div class="row">
-      <!--Side navigation-->
-      <nav class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#" [routerLink]="['/worlds']" routerLinkActive="active-link">Info</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" [routerLink]="[2, 'characters']" routerLinkActive="active-link" (click)="loadCharacter(2)">Character</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" [routerLink]="[2, '/cultures']" routerLinkActive="active-link">Cultures</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" [routerLink]="[2, '/countries']" routerLinkActive="active-link">Countries</a>
-          </li>
-        </ul>
-      </nav>
+  <div class="row">
+    <!--Side navigation-->
+    <nav class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" [routerLink]="['/worlds']" routerLinkActive="active-link">Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="[2, 'characters']" routerLinkActive="active-link" (click)="loadCharacters(2)">Character</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="[2, 'cultures']" routerLinkActive="active-link" (click)="loadCultures(2)">Cultures</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="[2, 'countries']" routerLinkActive="active-link" (click)="loadCountires(2)">Countries</a>
+        </li>
+      </ul>
+    </nav>
 
-      <!--Main working area. Create new. Select  available. Get information. Edit. Delete.-->
-      <main class="col-sm-9 col-md-9 pt-3">
-        <h1>Info</h1>
-        <!--Create new section-->
-        <section class="row">
-          <div class="col">
-            <button type="button" class="btn btn-success btn-md" (click)="ngxSmartModalService.getModal('neditFormModal').open()">New</button>
-          </div>
-        </section>
+    <!--Main working area. Create new. Select  available. Get information. Edit. Delete.-->
+    <main class="col-sm-9 col-md-9 pt-3">
+      <h1>Info</h1>
+      <!--Create new section-->
+      <section class="row">
+        <div class="col">
+          <button type="button" class="btn btn-success btn-md" (click)="ngxSmartModalService.getModal('neditFormModal').open()">New</button>
+        </div>
+      </section>
 
-        <div class="list-responsive row col-sm-12 col-md-12">
-          <!--List of available characters/countries/cultures-->
-          <ul class="list-group-flush col-sm-5 col-md-3">
-            <ng-container *ngFor="let item of items">
+      <div class="list-responsive row col-sm-12 col-md-12">
+        <!--List of available characters/countries/cultures-->
+        <ul class="list-group-flush col-sm-5 col-md-3">
+          <div *ngIf="selectedInputCharacteristic == 'character'">
+            <ng-container *ngFor="let character of characters">
               <li class="list-group-item">
-                <a class="" href="#">{{item.name}}</a>
+                <a class="" href="#">{{character.firstName}}</a>
               </li>
             </ng-container>
-          </ul>
-
-          <!--Area to display information about the selected element-->
-          <div class="col-sm-7 col-md-9">
-            <h3>About</h3>
-            <div></div>
-            <div class="container text-right">
-              <button type="button" class="btn btn-danger btn-sm">Delete</button>
-              <button type="button" class="btn btn-light btn-sm">Edit</button>
-            </div>
           </div>
+          <div *ngIf="selectedInputCharacteristic == 'country'">
+            <ng-container *ngFor="let country of countries">
+              <li class="list-group-item">
+                <a class="" href="#">{{country.name}}</a>
+              </li>
+            </ng-container>
+          </div>
+          <div *ngIf="selectedInputCharacteristic == 'culture'">
+            <ng-container *ngFor="let culture of cultures">
+              <li class="list-group-item">
+                <a class="" href="#">{{culture.name}}</a>
+              </li>
+            </ng-container>
+          </div>
+        </ul>
 
+        <!--Area to display information about the selected element-->
+        <div class="col-sm-7 col-md-9">
+          <h3>About</h3>
+          <div></div>
+          <div class="container text-right">
+            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+            <button type="button" class="btn btn-light btn-sm">Edit</button>
+          </div>
         </div>
-      </main>
-    </div>
+
+      </div>
+    </main>
+  </div>
 </div>
