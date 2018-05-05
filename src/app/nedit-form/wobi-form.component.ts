@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Import the Schema for World, Country, Character, Culture
@@ -47,6 +47,9 @@ export class wobiFormComponent implements OnInit{
     }) 
   }
 
+  @Input() selectedInputCharacteristic: string;
+
+  
   ngOnInit() {
   }
 
@@ -56,7 +59,4 @@ export class wobiFormComponent implements OnInit{
     this.ngxSmartModalService.getModal('neditFormModal').close();
   }
 
-  getType() {
-    this.type = ObjectTypes.world;
-  }
 }

@@ -13,13 +13,13 @@ import { wobiFormComponent } from './nedit-form/wobi-form.component';
 // Define the routes
 const appRoutes: Routes = [
   { path: 'worlds', component: BasicViewComponent },
-  { path: 'worlds/:id',      component: BasicViewComponent},
-  { path: ':WorldID/characters',      component: BasicViewComponent},
-  { path: ':WorldID/characters/:id',      component: BasicViewComponent},
-  { path: ':WorldID/cultures',      component: BasicViewComponent},
-  { path: ':WorldID/cultures/:id',      component: BasicViewComponent},
-  { path: ':WorldID/countries',      component: BasicViewComponent},
-  { path: ':WorldID/countries/:id',      component: BasicViewComponent},
+  { path: 'worlds/:id', component: BasicViewComponent},
+  { path: ':WorldID/characters', component: BasicViewComponent},
+  { path: ':WorldID/characters/:id', component: BasicViewComponent},
+  { path: ':WorldID/cultures', component: BasicViewComponent},
+  { path: ':WorldID/cultures/:id', component: BasicViewComponent},
+  { path: ':WorldID/countries', component: BasicViewComponent},
+  { path: ':WorldID/countries/:id', component: BasicViewComponent},
 ];
 
 
