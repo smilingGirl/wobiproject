@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { AppComponent } from './app.component';
 import { BasicViewComponent } from './basic-view/basic-view.component';
 import { wobiFormComponent } from './nedit-form/wobi-form.component';
+import { DetailViewComponent } from './detail-view/detail-view.component';
 
 // Define the routes
 const appRoutes: Routes = [
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     BasicViewComponent,
-    wobiFormComponent
+    wobiFormComponent,
+    DetailViewComponent
   ],
   imports: [
     RouterModule.forRoot(

@@ -9,15 +9,7 @@
     min-height: 100%;
 }
 
-/*Adjust navbars, side and top, to go with dark theme*/
-.sidebar {
-    &.nav-link {
-        &.active {
-            background-color: darkgray;
-        }
-    }
-}
-
+/*Adjust navbar, top, to go with dark theme*/
 .navbar {
     background-color: gray;
 }
@@ -35,14 +27,6 @@
     border-color: #191918 #191918 lightgray;
 }
 
-.nav-link {
-    &.active {
-        color: #000000;
-        background-color: lightgray;
-        border-color: #191918 #191918 lightgray;
-    }
-}
-
 a {
     color: firebrick;
     &:hover {
@@ -50,11 +34,3 @@ a {
     }
 }
 
-/*Adjust list view to fit dark theme*/
-.list-group-item {
-    background-color: lightgray;
-}
-
-.list-responsive {
-    padding-top: 2%;
-}
