@@ -12,7 +12,6 @@ import { World} from '../model/schema';
 })
 export class BasicViewComponent {
   worlds: World[];
-  world: World;
   showDialog = false;
   selectedWorldId;
 
@@ -34,10 +33,9 @@ export class BasicViewComponent {
 
   private loadWorld(id) {
     this._dataService.fetchWorldEntry(id).subscribe(data => {
-      this.world = data;
       this.selectedWorldId = data._id;
     }, error => {
-      alert('Failed fetching worlds');
+      alert('Failed fetching this world');
     });
   }
 }

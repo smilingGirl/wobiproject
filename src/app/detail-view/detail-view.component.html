@@ -1,20 +1,20 @@
-<!--Main stage. Everything beneith top nav-->
+<!--Main stage. Everything beneath top nav-->
 <div class="container-fluid">
   <div class="row">
     <!--Side navigation-->
     <nav class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#" [routerLink]="['/worlds']" routerLinkActive="active-link">Info</a>
+          <a class="nav-link active" href="#" [routerLink]="['/worlds']" routerLinkActive="active-link" (click)="loadWorld(_selectedWorldId)">Info</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="[selectedWorldId, 'characters']" routerLinkActive="active-link" (click)="loadCharacters(selectedWorldId)">Character</a>
+          <a class="nav-link" href="#" [routerLink]="[_selectedWorldId, 'characters']" routerLinkActive="active-link" (click)="loadCharacters(_selectedWorldId)">Character</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="[selectedWorldId, 'cultures']" routerLinkActive="active-link" (click)="loadCultures(selectedWorldId)">Cultures</a>
+          <a class="nav-link" href="#" [routerLink]="[_selectedWorldId, 'cultures']" routerLinkActive="active-link" (click)="loadCultures(_selectedWorldId)">Cultures</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="[selectedWorldId, 'countries']" routerLinkActive="active-link" (click)="loadCountires(selectedWorldId)">Countries</a>
+          <a class="nav-link" href="#" [routerLink]="[_selectedWorldId, 'countries']" routerLinkActive="active-link" (click)="loadCountries(_selectedWorldId)">Countries</a>
         </li>
       </ul>
     </nav>
@@ -23,7 +23,7 @@
     <main class="col-sm-9 col-md-9 pt-3">
       <h1>Info</h1>
       <!--Create new section-->
-      <section class="row">
+      <section class="row" *ngIf="selectedInputCharacteristic != 'world'">
         <div class="col">
           <button type="button" class="btn btn-success btn-md" (click)="ngxSmartModalService.getModal('neditFormModal').open()">New</button>
         </div>
@@ -35,21 +35,21 @@
           <div *ngIf="selectedInputCharacteristic == 'character'">
             <ng-container *ngFor="let character of characters">
               <li class="list-group-item">
-                <a class="" href="#" [routerLink]="[selectedWorldId, 'characters', character._id]" (click)="loadCharacter(selectedWorldId,character._id)">{{character.firstName}}</a>
+                <a class="" href="#" [routerLink]="[_selectedWorldId, 'characters', character._id]" (click)="loadCharacter(_selectedWorldId,character._id)">{{character.firstName}}</a>
               </li>
             </ng-container>
           </div>
           <div *ngIf="selectedInputCharacteristic == 'country'">
             <ng-container *ngFor="let country of countries">
               <li class="list-group-item">
-                <a class="" href="#" [routerLink]="[selectedWorldId, 'countries', country._id]" (click)="loadCountry(selectedWorldId,country._id)">{{country.name}}</a>
+                <a class="" href="#" [routerLink]="[_selectedWorldId, 'countries', country._id]" (click)="loadCountry(_selectedWorldId,country._id)">{{country.name}}</a>
               </li>
             </ng-container>
           </div>
           <div *ngIf="selectedInputCharacteristic == 'culture'">
             <ng-container *ngFor="let culture of cultures">
               <li class="list-group-item">
-                <a class="" href="#" [routerLink]="[selectedWorldId, 'cultures', culture._id]" (click)="loadCulture(selectedWorldId,culture._id)">{{culture.name}}</a>
+                <a class="" href="#" [routerLink]="[_selectedWorldId, 'cultures', culture._id]" (click)="loadCulture(_selectedWorldId,culture._id)">{{culture.name}}</a>
               </li>
             </ng-container>
           </div>
@@ -59,6 +59,17 @@
         <div class="col-sm-7 col-md-9">
           <h3>About</h3>
           <table class="table table-sm">
+            <!--tablebody for world-->
+            <tbody *ngIf="selectedInputCharacteristic == 'world' && detailViewActivated">
+              <tr>
+                <th scope="row">Name</th>
+                <td>{{world.name}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Work In Progress</th>
+                <td>{{world.workInProgress}}</td>
+              </tr>
+            </tbody>
             <!--tablebody for country-->
             <tbody *ngIf="selectedInputCharacteristic == 'country' && detailViewActivated">
               <tr>
