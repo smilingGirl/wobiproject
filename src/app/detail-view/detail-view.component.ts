@@ -17,10 +17,18 @@ import { World, Country, Character, Culture } from '../model/schema';
 })
 export class DetailViewComponent {
   //Control variables
+  private _selectedWorldId: number;
   selectedInputCharacteristic;
   detailViewActivated;
   
-  @Input() selectedWorldId: number;
+  @Input() set selectedWorldId(value: number) {
+    this._selectedWorldId = value;
+    this.loadWorld(this._selectedWorldId);
+  }
+
+  get currentWorldId(): number {
+    return this._selectedWorldId;
+  }
 
   worlds: World[];
   characters: Character[];
@@ -40,6 +48,10 @@ export class DetailViewComponent {
     private router: Router,
     private route: ActivatedRoute
   ){}
+
+  ngOnInit(): void {
+    this.loadWorld(this.selectedWorldId);
+  }
 
   /*All the getter functions fot the different entities*/
   private loadCharacters(worldID) {
@@ -63,7 +75,7 @@ export class DetailViewComponent {
     });
   }
 
-  private loadCountires(worldID) {
+  private loadCountries(worldID) {
     this._counDataService.fetchCountryEntries(worldID).subscribe(data => {
       this.selectedInputCharacteristic = "country";
       this.detailViewActivated = false;
@@ -74,6 +86,17 @@ export class DetailViewComponent {
   }
 
   /*Getter functions for specific entity by their ID*/
+  private loadWorld(worldID) {
+    this._dataService.fetchWorldEntry(worldID).subscribe(data => {
+      this.selectedInputCharacteristic = "world";
+      this.world = data;
+      this.detailViewActivated = true;
+    }, error => {
+      alert('Failed fetching this country');
+    });
+  }
+
+
   private loadCountry(worldID, id) {
     this._counDataService.fetchCountryEntry(worldID, id).subscribe(data => {
       this.country = data;
