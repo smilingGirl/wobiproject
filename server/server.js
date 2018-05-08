@@ -23,7 +23,7 @@ app.use(function (req, res, next){
   // Enable CORS for local testing
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  //res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Cache-Control, Pragma');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Cache-Control, Pragma');
   next();
 });
 
@@ -46,7 +46,7 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => log('We are live on http:localhost:  ${port}'));
+server.listen(port, () => log('We are live on http:localhost:' +  port));
 
 
 //Basic Handler to handle SchemaValdiation Fails

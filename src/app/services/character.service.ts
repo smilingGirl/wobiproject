@@ -18,17 +18,17 @@ export class CharacterService {
   public fetchCharacterEntries(worldID: number): Observable<Character[]> {
     return this.http.get<Character[]>(this.webServiceUrl + worldID + this.branchUrl);
   }
-  public fetchCharacterEntry(id: number, worldID: number): Observable<Character> {
+  public fetchCharacterEntry(worldID: number, id: number): Observable<Character> {
     return this.http.get<Character>(this.webServiceUrl + worldID + this.branchUrl + id);
   }
   public createCharacter(entry: Character): Observable<Character> {
-    return this.http.post<Character>(this.webServiceUrl + entry.properties.worldID + this.branchUrl, JSON.stringify(entry), httpOptions);
+    return this.http.post<Character>(this.webServiceUrl + entry.worldID + this.branchUrl, JSON.stringify(entry), httpOptions);
   }
   public updateCharacter(entry: Character): Observable<Character> {
-    return this.http.put<Character>(this.webServiceUrl + entry.properties.worldID + this.branchUrl + entry.properties.id, JSON.stringify(entry), httpOptions);
+    return this.http.put<Character>(this.webServiceUrl + entry.worldID + this.branchUrl + entry._id, JSON.stringify(entry), httpOptions);
   }
   public deleteCharacter(entry: Character): Observable<any> {
-    return this.http.delete<any>(this.webServiceUrl + entry.properties.worldID + this.branchUrl + entry.properties.id);
+    return this.http.delete<any>(this.webServiceUrl + entry.worldID + this.branchUrl + entry._id);
   }
 
 }
