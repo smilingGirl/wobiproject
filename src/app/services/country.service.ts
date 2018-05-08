@@ -18,11 +18,11 @@ export class CountryService {
   public fetchCountryEntries(worldID: number): Observable<Country[]> {
     return this.http.get<Country[]>(this.webServiceUrl + worldID + this.branchUrl);
   }
-  public fetchCountryEntry(id: number, worldID: number): Observable<Country> {
+  public fetchCountryEntry(worldID: number, id: number): Observable<Country> {
     return this.http.get<Country>(this.webServiceUrl + worldID + this.branchUrl + id);
   }
   public createCountry(entry: Country): Observable<Country> {
-    return this.http.post<Country>(this.webServiceUrl + entry.properties.worldID + this.branchUrl, JSON.stringify(entry), httpOptions);
+    return this.http.post<Country>(this.webServiceUrl + entry.worldID + this.branchUrl, JSON.stringify(entry), httpOptions);
   }
 
 }

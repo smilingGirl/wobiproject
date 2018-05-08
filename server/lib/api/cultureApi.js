@@ -8,6 +8,7 @@ function init(app, ws) {
   log.info(`*** API [GET] /:world/cultures registered`);
   app.post('/:worldID/cultures', validate({ body: schema.Culture }), postCultures);
   log.info(`*** API [POST] /:world/cultures registered`);
+  app.get('/:worldID/cultures/:cultureID', getCultureById);
   log.info(`*** API [GET] /:world/cultures/:cultureID registered`);
 }
 

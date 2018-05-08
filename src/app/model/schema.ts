@@ -1,7 +1,6 @@
 export interface World {
   type: 'object',
-  properties: {
-    id:{
+    _id:{
         type: "number"
     },
     name: {
@@ -51,17 +50,15 @@ export interface World {
             },
         },
     },
-  },
 };
 
 export interface Character {
     type: 'object',
-    properties: {
         worldID: {
             type: 'number',
             required: true
         },
-        id: {
+        _id: {
             type: 'number'
         },
       firstName: {
@@ -91,16 +88,18 @@ export interface Character {
           'Dead'
         ],
       },
-    },
   };
 
   export interface Culture {
     type: 'object',
-    properties: {
         worldID: {
             type: 'number',
             required: true
         },
+        _id:{
+            type: 'number',
+            required: true
+        }
       name: {
         type: 'string',
         required: true,
@@ -160,16 +159,18 @@ export interface Character {
                 },
             },
         },      
-    },
 };
 
 export interface Country {
     type: 'object',
-    properties: {
         worldID: {
             type: 'number',
             required: true
         },
+        _id: {
+            type: 'number',
+            required: true
+        }
       name: {
         type: 'string',
         required: true,
@@ -226,5 +227,4 @@ export interface Country {
                 },
             },
         },      
-    },
   };

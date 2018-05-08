@@ -35,21 +35,21 @@
           <div *ngIf="selectedInputCharacteristic == 'character'">
             <ng-container *ngFor="let character of characters">
               <li class="list-group-item">
-                <a class="" href="#">{{character.firstName}}</a>
+                <a class="" href="#" [routerLink]="[selectedWorldId, 'characters', character._id]" (click)="loadCharacter(selectedWorldId,character._id)">{{character.firstName}}</a>
               </li>
             </ng-container>
           </div>
           <div *ngIf="selectedInputCharacteristic == 'country'">
             <ng-container *ngFor="let country of countries">
               <li class="list-group-item">
-                <a class="" href="#">{{country.name}}</a>
+                <a class="" href="#" [routerLink]="[selectedWorldId, 'countries', country._id]" (click)="loadCountry(selectedWorldId,country._id)">{{country.name}}</a>
               </li>
             </ng-container>
           </div>
           <div *ngIf="selectedInputCharacteristic == 'culture'">
             <ng-container *ngFor="let culture of cultures">
               <li class="list-group-item">
-                <a class="" href="#">{{culture.name}}</a>
+                <a class="" href="#" [routerLink]="[selectedWorldId, 'cultures', culture._id]" (click)="loadCulture(selectedWorldId,culture._id)">{{culture.name}}</a>
               </li>
             </ng-container>
           </div>
@@ -58,6 +58,49 @@
         <!--Area to display information about the selected element-->
         <div class="col-sm-7 col-md-9">
           <h3>About</h3>
+          <table class="table table-sm">
+            <!--tablebody for country-->
+            <tbody *ngIf="selectedInputCharacteristic == 'country' && detailViewActivated">
+              <tr>
+                <th scope="row">Name</th>
+                <td>{{country.name}}</td>
+              </tr>
+              <tr>
+                <th scope="row">System</th>
+                <td>{{country.system}}</td>
+              </tr>
+            </tbody>
+            <!--tablebody for culture-->
+            <tbody *ngIf="selectedInputCharacteristic == 'culture' && detailViewActivated">
+              <tr>
+                <th scope="row">Name</th>
+                <td>{{culture.name}}</td>
+              </tr>
+            </tbody>
+            <!--tablebody for character-->
+            <tbody *ngIf="selectedInputCharacteristic == 'character' && detailViewActivated">
+              <tr>
+                <th scope="row">First Name</th>
+                <td>{{character.firstName}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Last Name</th>
+                <td>{{character.lastName}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Age</th>
+                <td>{{character.age}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Culture</th>
+                <td>{{character.culture}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Status</th>
+                <td>{{character.status}}</td>
+              </tr>
+            </tbody>
+          </table>
           <div></div>
           <div class="container text-right">
             <button type="button" class="btn btn-danger btn-sm">Delete</button>

@@ -18,10 +18,10 @@ export class CultureService {
   public fetchCultureEntries(worldID: number): Observable<Culture[]> {
     return this.http.get<Culture[]>(this.webServiceUrl + worldID + this.branchUrl);
   }
-  public fetchCultureEntry(id: number, worldID: number): Observable<Culture> {
+  public fetchCultureEntry(worldID: number, id: number): Observable<Culture> {
     return this.http.get<Culture>(this.webServiceUrl + worldID + this.branchUrl + id);
   }
   public createCulture(entry: Culture): Observable<Culture> {
-    return this.http.post<Culture>(this.webServiceUrl + entry.properties.worldID + this.branchUrl, JSON.stringify(entry), httpOptions);
+    return this.http.post<Culture>(this.webServiceUrl + entry.worldID + this.branchUrl, JSON.stringify(entry), httpOptions);
   }
 }
