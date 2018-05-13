@@ -7,13 +7,6 @@ import { World, Country, Character, Culture } from '../model/schema';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { WorldService } from '../services/world.service';
 
-enum ObjectTypes {
-  world =  "world",
-  chara = "character",
-  culture = "culture",
-  country = "country"
-}
-
 @Component({
   selector: 'wobi-form',
   templateUrl: './wobi-form.component.html',
@@ -31,11 +24,8 @@ export class wobiFormComponent implements OnInit{
   country:string = '';
   culture:string = '';
   status:string = '';
-  ObjectTypes: typeof  ObjectTypes = ObjectTypes;
-  type: ObjectTypes;
-
-  worlds: World[];
-
+  wip:boolean = false;
+ 
   constructor(private fb: FormBuilder, private _dataService: WorldService, public ngxSmartModalService: NgxSmartModalService) {
     this.wobiForm = new FormGroup({
       'name': this.name,
@@ -43,7 +33,8 @@ export class wobiFormComponent implements OnInit{
       culture: new FormControl(),
       fname: new FormControl(),
       age: new FormControl(),
-      status: new FormControl()
+      status: new FormControl(),
+      wip: new FormControl()
     }) 
   }
 
@@ -56,7 +47,25 @@ export class wobiFormComponent implements OnInit{
   onSubmitModelBased() {
     console.log("model-based form submitted");
     console.log(this.wobiForm);
+    if (this.selectedInputCharacteristic  == "world") {
+      console.log(this.wobiForm.value);
+      this.newWorld(this.wobiForm.value.name, this.wobiForm.value.wip);
+    }
     this.ngxSmartModalService.getModal('neditFormModal').close();
+  }
+
+
+  private newWorld(name, wip) {
+    var newW = <World>{};
+    newW.name = name;
+    if(wip != true) {wip = false};
+    newW.WorkInProgress = wip;
+
+    this._dataService.createWorld(newW).subscribe(data => {
+      console.log(data);
+    }, error => {
+      alert('Failed fetching worlds');
+    });
   }
 
 }

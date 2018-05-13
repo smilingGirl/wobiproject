@@ -50,7 +50,7 @@ export class DetailViewComponent {
   ){}
 
   ngOnInit(): void {
-    this.loadWorld(this.selectedWorldId);
+    this.loadWorld(this._selectedWorldId);
   }
 
   /*All the getter functions fot the different entities*/
@@ -69,7 +69,6 @@ export class DetailViewComponent {
       this.selectedInputCharacteristic = "culture";
       this.detailViewActivated = false;
       this.cultures = data;
-      console.log(this.selectedWorldId);
     }, error => {
       alert('Failed fetching cultures');
     });
@@ -123,6 +122,20 @@ export class DetailViewComponent {
       alert('Failed fetching this character');
     });
   }
+
+  /*Delte functions for world attribute character*/
+  private deleteCharacter(worldID, id) {
+    this._charaDataService.deleteCharacter(worldID, id).subscribe(data => {
+      for (var i=0; i < this.characters.length; i++) {
+        if (this.characters[i]._id == id){
+          this.characters.splice(i, 1)
+        }
+      }
+    }, error => {
+      alert('Failed deleting this character');
+    });
+  }
+
 
 
 }

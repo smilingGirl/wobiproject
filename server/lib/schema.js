@@ -14,18 +14,6 @@ schemas.World = {
             null,
         ],
     },
-    countries:{
-        type: "array",
-        items:{
-            type: "number",
-        },
-    },
-    cultures:{
-        type: "array",
-        items: {
-            type: "number",
-        },          
-    },
     history:{
         type: "array",
         items: {

@@ -19,6 +19,9 @@
 </nav>
 
 <div class="row">
+  <div class="nav-item" id="createNewWorldControl">
+      <a class="nav-link" href="#"  (click)="newWorld()">New World</a>
+  </div>
   <ul class="nav nav-tabs" *ngFor="let world of worlds">
     <li class="nav-item">
       <a class="nav-link" href="#" [routerLink]="['worlds', world._id]" routerLinkActive="active-link" (click)="loadWorld(world._id)">{{world.name}}</a>
@@ -28,3 +31,4 @@
 
 <app-detail-view [selectedWorldId]='selectedWorldId' *ngIf="selectedWorldId">
 </app-detail-view>
+<wobi-form [selectedInputCharacteristic]='selectedInputCharacteristic' (onClose)="loadWorlds()"></wobi-form>
