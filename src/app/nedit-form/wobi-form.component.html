@@ -3,7 +3,7 @@
     <form [formGroup]="wobiForm">
       <div class="form-container">
         <div>
-          <h2>Create New</h2>
+          <h2>Create New  {{selectedInputCharacteristic}}</h2>
 
           <div class="form-group row">
             <label for="name-input" class="col-2 col-form-label">Name</label>
@@ -26,7 +26,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" *ngIf="selectedInputCharacteristic == 'character'">
             <label for="exampleSelect1">Country</label>
             <select class="form-control" id="country" formControlName="country">
               <option>1</option>
@@ -37,7 +37,7 @@
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" *ngIf="selectedInputCharacteristic == 'character'">
             <label for="exampleSelect1">Culture</label>
             <select class="form-control" id="culture" formControlName="culture">
               <option>1</option>
@@ -54,6 +54,11 @@
               <option>Alive</option>
               <option>Dead</option>
             </select>
+          </div>
+
+          <div class="form-group" *ngIf="selectedInputCharacteristic == 'world'">
+            <label for="exampleSelect1">Work in Progress</label>
+            <input type="checkbox" class="form-check-input" formControlName="wip">
           </div>
 
 

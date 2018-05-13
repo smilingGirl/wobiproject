@@ -69,7 +69,8 @@ function postCharacter(req, res) {
 		firstName: req.body.firstName, 
 		lastName: req.body.lastName, 
 		age: req.body.age, 
-		type: 'character', 
+		type: 'character',
+		status: req.body.status,
 		worldId: req.body.worldID,
 		culture: req.body.culture, 
 	};

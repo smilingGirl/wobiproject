@@ -30,19 +30,4 @@ export class WorldService {
     return this.http.delete<any>(this.webServiceUrl + entry._id);
   }
 
-  /*public fetchWorldEntries() {
-    return this.http.get(this.webServiceUrl).map((res:Response) => res.json());
-  }
-  public fetchWorldEntry(id: number) {
-    return this.http.get(this.webServiceUrl + id).map((res:Response) => res.json());
-  }
-  public createWorld(entry: World) {
-    return this.http.post(this.webServiceUrl, JSON.stringify(entry)).map((res:Response) => res.json());
-  }
-  public updateWorld(entry: World) {
-    return this.http.put(this.webServiceUrl + entry.properties.id, JSON.stringify(entry)).map((res:Response) => res.json());
-  }
-  public deleteWorld(entry: World) {
-    return this.http.delete(this.webServiceUrl + entry.properties.id).map((res:Response) => res.json());
-  }*/
 }

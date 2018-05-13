@@ -27,8 +27,8 @@ export class CharacterService {
   public updateCharacter(entry: Character): Observable<Character> {
     return this.http.put<Character>(this.webServiceUrl + entry.worldID + this.branchUrl + entry._id, JSON.stringify(entry), httpOptions);
   }
-  public deleteCharacter(entry: Character): Observable<any> {
-    return this.http.delete<any>(this.webServiceUrl + entry.worldID + this.branchUrl + entry._id);
+  public deleteCharacter(worldID: number, id: number): Observable<any> {
+    return this.http.delete<any>(this.webServiceUrl + worldID + this.branchUrl + id);
   }
 
 }

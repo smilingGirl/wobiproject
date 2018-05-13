@@ -1,7 +1,7 @@
 .row {
-    margin-left: 1%;
+    margin-left: 0;
+    margin-right: 0;
 }
-
 /*Make it a dark theme*/
 .container-fluid {
     background-color: lightgray;
@@ -34,3 +34,11 @@ a {
     }
 }
 
+#createNewWorldControl{
+    background-color: mediumseagreen;
+    margin-right: 3px;
+    margin-left: 1px;
+    & a {
+        color: black;
+    }
+}
