@@ -20,7 +20,7 @@
 
 <div class="row">
   <div class="nav-item" id="createNewWorldControl">
-      <a class="nav-link" href="#"  (click)="newWorld()">New World</a>
+      <a class="nav-link" href="#"  [routerLink]="['/worlds']" (click)="newWorld()">New World</a>
   </div>
   <ul class="nav nav-tabs" *ngFor="let world of worlds">
     <li class="nav-item">
