@@ -53,6 +53,14 @@ export class DetailViewComponent {
     this.loadWorld(this._selectedWorldId);
   }
 
+  private loadWorlds() {
+    this._dataService.fetchWorldEntries().subscribe(data => {
+      this.worlds = data;
+    }, error => {
+      alert('Failed fetching worlds');
+    });
+  }
+
   /*All the getter functions fot the different entities*/
   private loadCharacters(worldID) {
     this._charaDataService.fetchCharacterEntries(worldID).subscribe(data => {
@@ -133,6 +141,14 @@ export class DetailViewComponent {
       }
     }, error => {
       alert('Failed deleting this character');
+    });
+  }
+
+  private deleteWorld(worldID) {
+    this._dataService.deleteWorld(worldID).subscribe(data => {
+        console.log(data); 
+    }, error => {
+      alert('Failed deleting this world');
     });
   }
 

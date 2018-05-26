@@ -56,6 +56,13 @@
             </select>
           </div>
 
+          <div class="form-group row" *ngIf="selectedInputCharacteristic == 'country'">
+            <label for="country-system-input" class="col-2 col-form-label">System</label>
+            <div class="col-10">
+              <input class="form-control" type="text" id="system-input" formControlName="system">
+            </div>
+          </div>
+
           <div class="form-group" *ngIf="selectedInputCharacteristic == 'world'">
             <label for="exampleSelect1">Work in Progress</label>
             <input type="checkbox" class="form-check-input" formControlName="wip">

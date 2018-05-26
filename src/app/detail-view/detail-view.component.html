@@ -28,6 +28,11 @@
           <button type="button" class="btn btn-success btn-md" (click)="ngxSmartModalService.getModal('neditFormModal').open()">New</button>
         </div>
       </section>
+      <section class="row" *ngIf="selectedInputCharacteristic == 'world'">
+        <div class="col">
+          <button type="button" class="btn btn-danger btn-sm" [routerLink]="['/']" (click)="deleteWorld(_selectedWorldId)">Delete world</button>
+        </div>
+      </section>
 
       <div class="list-responsive row col-sm-12 col-md-12">
         <!--List of available characters/countries/cultures-->
@@ -124,4 +129,4 @@
 
   </div>
 </div>
-<wobi-form [selectedInputCharacteristic]='selectedInputCharacteristic'></wobi-form>
+<wobi-form [selectedWorldId]='_selectedWorldId' [selectedInputCharacteristic]='selectedInputCharacteristic'></wobi-form>

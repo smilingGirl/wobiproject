@@ -26,8 +26,8 @@ export class WorldService {
   public updateWorld(entry: World): Observable<World> {
     return this.http.put<World>(this.webServiceUrl + entry._id, JSON.stringify(entry), httpOptions);
   }
-  public deleteWorld(entry: World): Observable<any> {
-    return this.http.delete<any>(this.webServiceUrl + entry._id);
+  public deleteWorld(id: number): Observable<any> {
+    return this.http.delete<any>(this.webServiceUrl + id);
   }
 
 }
