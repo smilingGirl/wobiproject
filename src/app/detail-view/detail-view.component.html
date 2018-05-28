@@ -139,8 +139,8 @@
                   <td *ngIf="!editMode">{{character.status}}</td>
                   <td *ngIf="editMode">
                     <select class="form-control" formControlName="status">
-                      <option>Alive</option>
-                      <option>Dead</option>
+                      <option attr.selected="{{world.status}} == 'Alive'">Alive</option>
+                      <option attr.selected="{{world.status}} == 'Dead'">Dead</option>
                     </select>
                   </td>
                 </tr>
@@ -162,4 +162,4 @@
 
   </div>
 </div>
-<app-wobi-form [selectedWorldId]='_selectedWorldId' [selectedInputCharacteristic]='selectedInputCharacteristic'></app-wobi-form>
+<app-wobi-form [selectedWorldId]='_selectedWorldId' [selectedInputCharacteristic]='selectedInputCharacteristic' (newCountry)="onNewCountry($event)" (newCharacter)="onNewCharacter($event)" (newCulture)="onNewCulture($event)"></app-wobi-form>

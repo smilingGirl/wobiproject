@@ -29,6 +29,6 @@
   </ul>
 </div>
 
-<app-detail-view [selectedWorldId]='selectedWorldId' *ngIf="selectedWorldId">
+<app-detail-view [selectedWorldId]='selectedWorldId' *ngIf="selectedWorldId" (deletedWorld)="onDeletedWorld($event)">
 </app-detail-view>
-<app-wobi-form [selectedInputCharacteristic]='selectedInputCharacteristic' (onClose)="loadWorlds()"></app-wobi-form>
+<app-wobi-form [selectedInputCharacteristic]='selectedInputCharacteristic' (newWorld)="onNewWorld($event)"></app-wobi-form>

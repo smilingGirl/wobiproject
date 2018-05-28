@@ -46,11 +46,23 @@ export class BasicViewComponent implements OnInit {
   }
 
   private newWorld() {
-    console.log(this.selectedInputCharacteristic);
     this.selectedInputCharacteristic = 'world';
-    console.log(this.selectedInputCharacteristic);
     this.ngxSmartModalService.getModal('newFormModal').open();
   }
 
+  // Event handler for new World created
+  onNewWorld(newWorld: World) {
+    this.worlds.push(newWorld);
+  }
+
+  // Event handler for World deleted
+  private onDeletedWorld(worldID) {
+    for (let i = 0; i < this.worlds.length; i++) {
+      if (this.worlds[i]._id === worldID) {
+        this.worlds.splice(i, 1);
+        this.selectedWorldId = null;
+      }
+    }
+  }
 }
 

@@ -1,7 +1,9 @@
 import {
   Component,
+  EventEmitter,
   OnInit,
-  Input
+  Input,
+  Output
 } from '@angular/core';
 import {
   Router,
@@ -65,6 +67,7 @@ export class DetailViewComponent implements OnInit {
     this._selectedWorldId = value;
     this.loadWorld(this._selectedWorldId);
   }
+  @Output() deletedWorld = new EventEmitter<number>();
 
   get currentWorldId(): number {
     return this._selectedWorldId;
@@ -72,10 +75,10 @@ export class DetailViewComponent implements OnInit {
 
   // Form variables
   editForm: FormGroup;
-  wname;
-  coname;
-  cuname;
-  caname;
+  wname: string = '';
+  coname: string = '';
+  cuname: string = '';
+  caname: string = '';
   fname: string = '';
   age: number;
   status: string = '';
@@ -94,12 +97,12 @@ export class DetailViewComponent implements OnInit {
   ) {
     this.editForm = new FormGroup({
       wname: new FormControl('', Validators.required),
-      caname: new FormControl('', Validators.required),
+      caname: new FormControl(''),
       country: new FormControl(),
       culture: new FormControl(),
-      fname: new FormControl(),
+      fname: new FormControl('', Validators.required),
       age: new FormControl(),
-      status: new FormControl(),
+      status: new FormControl(''),
       system: new FormControl(),
       wip: new FormControl(false, Validators.required)
     });
@@ -126,6 +129,19 @@ export class DetailViewComponent implements OnInit {
       }
       this.editWorld(this.editForm.value.wname, this.editForm.value.wip, this.currentWorldId);
     } else if (this.selectedInputCharacteristic === 'character') {
+      console.log(this.editForm.value);
+      if (this.editForm.value.caname === '') {
+        this.editForm.value.caname = this.character.lastName;
+      }
+      if (this.editForm.value.fname === '' || !this.editForm.value.fname) {
+        this.editForm.value.fname = this.character.firstName;
+      }
+      if (!this.editForm.value.age) {
+        this.editForm.value.age = this.character.age;
+      }
+      if (this.editForm.value.status === '') {
+        this.editForm.value.status = this.character.status;
+      }
       this.editCharacter(
         this.editForm.value.fname,
         this.editForm.value.caname,
@@ -136,7 +152,6 @@ export class DetailViewComponent implements OnInit {
       );
     }
     this.editModeEnd();
-    this.loadWorld(this.currentWorldId);
   }
 
   /* Load worlds */
@@ -233,7 +248,7 @@ export class DetailViewComponent implements OnInit {
 
   private deleteWorld(worldID) {
     this._dataService.deleteWorld(worldID).subscribe(data => {
-      console.log(data);
+      this.deletedWorld.emit(worldID);
     }, error => {
       alert('Failed deleting this world');
     });
@@ -248,10 +263,9 @@ export class DetailViewComponent implements OnInit {
     newC.age = age;
     newC.status = status;
     newC.worldID = worldID;
-    console.log(newC);
 
     this._charaDataService.updateCharacter(newC).subscribe(data => {
-      console.log(data);
+      this.character = newC;
     }, error => {
       alert('Failed updating the character');
     });
@@ -265,8 +279,24 @@ export class DetailViewComponent implements OnInit {
 
     this._dataService.updateWorld(newW).subscribe(data => {
       console.log(data);
+      this.world = newW;
     }, error => {
       alert('Failed updating this world');
     });
   }
+
+  // Event handler to handle creation of new entities
+  private onNewCharacter(newC: Character) {
+    this.characters.push(newC[0]);
+  }
+
+  private onNewCulture(newC: Culture) {
+    this.cultures.push(newC[0]);
+  }
+
+  private onNewCountry(newC: Country) {
+    this.countries.push(newC[0]);
+  }
 }
+
+

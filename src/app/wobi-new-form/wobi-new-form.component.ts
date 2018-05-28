@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 // Import the Schema for World, Country, Character, Culture
@@ -65,6 +65,10 @@ export class WobiFormComponent implements OnInit {
   @Input() set selectedWorldId(value: number) {
     this._selectedWorldId = value;
   }
+  @Output() newWorld = new EventEmitter<World>();
+  @Output() newCharacter = new EventEmitter<Character>();
+  @Output() newCulture = new EventEmitter<Culture>();
+  @Output() newCountry = new EventEmitter<Country>();
 
   ngOnInit() {
     this.loadCountries(this._selectedWorldId);
@@ -74,9 +78,9 @@ export class WobiFormComponent implements OnInit {
   onSubmitModelBased() {
     // create new entitiy
     if (this._selectedInputCharacteristic  === 'world') {
-      this.newWorld(this.wobiForm.value.name, this.wobiForm.value.wip);
+      this.createWorld(this.wobiForm.value.name, this.wobiForm.value.wip);
     } else if (this._selectedInputCharacteristic  === 'character') {
-      this.newCharacter(
+      this.createCharacter(
         this.wobiForm.value.fname,
         this.wobiForm.value.name,
         this.wobiForm.value.age,
@@ -84,9 +88,9 @@ export class WobiFormComponent implements OnInit {
         this._selectedWorldId
       );
     } else if (this._selectedInputCharacteristic === 'culture') {
-      this.newCulture(this.wobiForm.value.name, this._selectedWorldId);
+      this.createCulture(this.wobiForm.value.name, this._selectedWorldId);
     } else if (this._selectedInputCharacteristic === 'country') {
-      this.newCountry(this.wobiForm.value.name, this.wobiForm.value.system, this._selectedWorldId);
+      this.createCountry(this.wobiForm.value.name, this.wobiForm.value.system, this._selectedWorldId);
     }
     // edit existing entity
     this.ngxSmartModalService.getModal('newFormModal').close();
@@ -94,20 +98,20 @@ export class WobiFormComponent implements OnInit {
   }
 
   /* Functions to handle the creation of new elements */
-  private newWorld(name, wip) {
+  private createWorld(name, wip) {
     const newW = <World>{};
     newW.name = name;
     if (wip !== true) {wip = false; }
     newW.WorkInProgress = wip;
 
     this._dataService.createWorld(newW).subscribe(data => {
-      console.log(data);
+      this.newWorld.emit(data);
     }, error => {
       alert('Failed creating a new world');
     });
   }
 
-  private newCharacter(firstname, lastname, age, status, worldID) {
+  private createCharacter(firstname, lastname, age, status, worldID) {
     const newC = <Character>{};
     newC.lastName = lastname;
     newC.firstName = firstname;
@@ -116,32 +120,32 @@ export class WobiFormComponent implements OnInit {
     newC.worldID = worldID;
 
     this._charaService.createCharacter(newC).subscribe(data => {
-      console.log(data);
+      this.newCharacter.emit(data);
     }, error => {
       alert('Failed creating a new character');
     });
   }
 
-  private newCountry(name, system, worldID ) {
+  private createCountry(name, system, worldID ) {
     const newC = <Country>{};
     newC.name = name;
     newC.system = system;
     newC.worldID = worldID;
 
     this._countSevice.createCountry(newC).subscribe(data => {
-      console.log(data);
+      this.newCountry.emit(data);
     }, error => {
       alert('Failed creating a new country');
     });
   }
 
-  private newCulture(name, worldID ) {
+  private createCulture(name, worldID ) {
     const newC = <Culture>{};
     newC.name = name;
     newC.worldID = worldID;
 
     this._cultService.createCulture(newC).subscribe(data => {
-      console.log(data);
+      this.newCulture.emit(data);
     }, error => {
       alert('Failed creating a new culture');
     });
