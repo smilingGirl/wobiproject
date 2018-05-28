@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
 import { WorldService } from '../services/world.service';
@@ -12,18 +12,17 @@ import { World, Character} from '../model/schema';
   providers: [WorldService]
 })
 
-export class BasicViewComponent {
+export class BasicViewComponent implements OnInit {
   selectedInputCharacteristic;
 
   worlds: World[];
   world: World;
-  showDialog = false;
   selectedWorldId;
 
   constructor(
     private _dataService: WorldService,
     public ngxSmartModalService: NgxSmartModalService
-  ){}
+  ) {}
 
   ngOnInit(): void {
     this.loadWorlds();
@@ -46,9 +45,11 @@ export class BasicViewComponent {
     });
   }
 
-  private newWorld(name, wip) {
-    this.selectedInputCharacteristic = "world";
-    this.ngxSmartModalService.getModal('neditFormModal').open();
+  private newWorld() {
+    console.log(this.selectedInputCharacteristic);
+    this.selectedInputCharacteristic = 'world';
+    console.log(this.selectedInputCharacteristic);
+    this.ngxSmartModalService.getModal('newFormModal').open();
   }
 
 }

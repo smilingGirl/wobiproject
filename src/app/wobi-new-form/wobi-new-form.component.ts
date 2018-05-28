@@ -11,34 +11,42 @@ import { CultureService } from '../services/culture.service';
 import { CountryService } from '../services/country.service';
 
 @Component({
-  selector: 'wobi-form',
-  templateUrl: './wobi-form.component.html',
-  styleUrls: ['./wobi-form.component.scss'],
+  selector: 'app-wobi-form',
+  templateUrl: './wobi-new-form.component.html',
+  styleUrls: ['./wobi-new-form.component.scss'],
   providers: [WorldService, CharacterService, CultureService, CountryService]
 })
 
-//@Modal()
-export class wobiFormComponent implements OnInit{
-  wobiForm: FormGroup;
-
-  name = new FormControl("", Validators.required);
-  fname:string = '';
-  age:number;
-  country:string = '';
-  culture:string = '';
-  status:string = '';
-  system:string = '';
-  wip:boolean = false;
+// @Modal()
+export class WobiFormComponent implements OnInit {
+  // Helper variables
   private _selectedWorldId: number;
- 
+  private _selectedInputCharacteristic: string;
+
+  // Information storage Varaibles
+  cultures: Culture[];
+  countries: Country[];
+  character: Character;
+
+  // Form variables
+  wobiForm: FormGroup;
+  name = new FormControl('', Validators.required);
+  fname: string = '';
+  age: number;
+  country: string = '';
+  culture: string = '';
+  status: string = '';
+  system: string = '';
+  wip: boolean = false;
+
   constructor(
-    private fb: FormBuilder, 
-    private _dataService: WorldService, 
-    public ngxSmartModalService: NgxSmartModalService, 
+    private fb: FormBuilder,
+    private _dataService: WorldService,
+    public ngxSmartModalService: NgxSmartModalService,
     private _charaService: CharacterService,
     private _cultService: CultureService,
-    private _countSevice: CountryService 
-  ){
+    private _countSevice: CountryService
+  ) {
     this.wobiForm = new FormGroup({
       'name': this.name,
       country: new FormControl(),
@@ -47,39 +55,49 @@ export class wobiFormComponent implements OnInit{
       age: new FormControl(),
       status: new FormControl(),
       system: new FormControl(),
-      wip: new FormControl()
-    }) 
+      wip: new FormControl(Validators.required)
+    });
   }
 
-  @Input() selectedInputCharacteristic: string;
+  @Input() set selectedInputCharacteristic(value: string) {
+    this._selectedInputCharacteristic = value;
+  }
   @Input() set selectedWorldId(value: number) {
     this._selectedWorldId = value;
-    console.log(this._selectedWorldId);
   }
 
-  
   ngOnInit() {
+    this.loadCountries(this._selectedWorldId);
+    this.loadCultures(this._selectedWorldId);
   }
 
   onSubmitModelBased() {
-    console.log("model-based form submitted");
-    if (this.selectedInputCharacteristic  == "world") {
+    // create new entitiy
+    if (this._selectedInputCharacteristic  === 'world') {
       this.newWorld(this.wobiForm.value.name, this.wobiForm.value.wip);
-    } else if (this.selectedInputCharacteristic  == "character") {
-      this.newCharacter(this.wobiForm.value.fname, this.wobiForm.value.name, this.wobiForm.value.age, this.wobiForm.value.status, this._selectedWorldId);
-    } else if (this.selectedInputCharacteristic == "culture") {
+    } else if (this._selectedInputCharacteristic  === 'character') {
+      this.newCharacter(
+        this.wobiForm.value.fname,
+        this.wobiForm.value.name,
+        this.wobiForm.value.age,
+        this.wobiForm.value.status,
+        this._selectedWorldId
+      );
+    } else if (this._selectedInputCharacteristic === 'culture') {
       this.newCulture(this.wobiForm.value.name, this._selectedWorldId);
-    } else if (this.selectedInputCharacteristic == "country") {
+    } else if (this._selectedInputCharacteristic === 'country') {
       this.newCountry(this.wobiForm.value.name, this.wobiForm.value.system, this._selectedWorldId);
     }
-    this.ngxSmartModalService.getModal('neditFormModal').close();
+    // edit existing entity
+    this.ngxSmartModalService.getModal('newFormModal').close();
+    this.wobiForm.reset();
   }
 
-
+  /* Functions to handle the creation of new elements */
   private newWorld(name, wip) {
-    var newW = <World>{};
+    const newW = <World>{};
     newW.name = name;
-    if(wip != true) {wip = false};
+    if (wip !== true) {wip = false; }
     newW.WorkInProgress = wip;
 
     this._dataService.createWorld(newW).subscribe(data => {
@@ -90,7 +108,7 @@ export class wobiFormComponent implements OnInit{
   }
 
   private newCharacter(firstname, lastname, age, status, worldID) {
-    var newC = <Character>{};
+    const newC = <Character>{};
     newC.lastName = lastname;
     newC.firstName = firstname;
     newC.age = age;
@@ -104,8 +122,8 @@ export class wobiFormComponent implements OnInit{
     });
   }
 
-  private newCountry(name,system, worldID ) {
-    var newC = <Country>{};
+  private newCountry(name, system, worldID ) {
+    const newC = <Country>{};
     newC.name = name;
     newC.system = system;
     newC.worldID = worldID;
@@ -118,7 +136,7 @@ export class wobiFormComponent implements OnInit{
   }
 
   private newCulture(name, worldID ) {
-    var newC = <Culture>{};
+    const newC = <Culture>{};
     newC.name = name;
     newC.worldID = worldID;
 
@@ -129,4 +147,20 @@ export class wobiFormComponent implements OnInit{
     });
   }
 
+  /* Load information about specific world, e.g. getter functions for countries and cultures */
+  private loadCultures(worldID) {
+    this._cultService.fetchCultureEntries(worldID).subscribe(data => {
+      this.cultures = data;
+    }, error => {
+      alert('Failed fetching cultures');
+    });
+  }
+
+  private loadCountries(worldID) {
+    this._countSevice.fetchCountryEntries(worldID).subscribe(data => {
+      this.countries = data;
+    }, error => {
+      alert('Failed fetching countries');
+    });
+  }
 }

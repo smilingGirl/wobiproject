@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BasicViewComponent } from "./basic-view/basic-view.component";
+import { BasicViewComponent } from './basic-view/basic-view.component';
 
 @Component({
   selector: 'app-root',
@@ -13,5 +13,4 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
   }
-  
 }
