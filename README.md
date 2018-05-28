@@ -28,22 +28,22 @@ Available world components (so far):
     - holidays (backend support only so far)
     - values (backend support only so far)
 
-API routes for version 1.0.0. :
- *** API [GET] /worlds registered
- *** API [POST] /worlds registered
-*** API [GET] /worlds/:worldID registered
-*** API [PUT] /worlds/:worldID registered
-*** API [DELETE] /worlds/:worldID registered
-*** API [GET] /:world/characters registered
-*** API [POST] /:world/characters registered
-*** API [PUT] /:world/characters/:characterID registered
-*** API [DELETE] /:world/characters/:characterID registered
-*** API [GET] /:world/characters/:characterID registered
-*** API [GET] /:world/countries registered
-*** API [POST] /:world/countries registered
-*** API [GET] /:world/countries/:countryID registered
-*** API [GET] /:world/cultures registered
-*** API [POST] /:world/cultures registered
-*** API [GET] /:world/cultures/:cultureID registered
+API routes for version 1.0.0. : <br />
+*** API [GET] /worlds registered <br />
+*** API [POST] /worlds registered <br />
+*** API [GET] /worlds/:worldID registered <br />
+*** API [PUT] /worlds/:worldID registered <br />
+*** API [DELETE] /worlds/:worldID registered <br />
+*** API [GET] /:world/characters registered <br />
+*** API [POST] /:world/characters registered <br />
+*** API [PUT] /:world/characters/:characterID registered <br />
+*** API [DELETE] /:world/characters/:characterID registered <br />
+*** API [GET] /:world/characters/:characterID registered <br />
+*** API [GET] /:world/countries registered <br />
+*** API [POST] /:world/countries registered <br />
+*** API [GET] /:world/countries/:countryID registered <br />
+*** API [GET] /:world/cultures registered <br />
+*** API [POST] /:world/cultures registered <br />
+*** API [GET] /:world/cultures/:cultureID registered <br />
 
 - not included so far: PUT and DELETE support for countries and cultures
