@@ -29,8 +29,8 @@ Available world components (so far):
     - values (backend support only so far)
 
 API routes for version 1.0.0. :
-*** API [GET] /worlds registered
-*** API [POST] /worlds registered
+ *** API [GET] /worlds registered
+ *** API [POST] /worlds registered
 *** API [GET] /worlds/:worldID registered
 *** API [PUT] /worlds/:worldID registered
 *** API [DELETE] /worlds/:worldID registered
