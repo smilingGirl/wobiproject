@@ -4,11 +4,11 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router'
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BasicViewComponent } from './basic-view/basic-view.component';
-import { wobiFormComponent } from './nedit-form/wobi-form.component';
+import { WobiFormComponent } from './wobi-new-form/wobi-new-form.component';
 import { DetailViewComponent } from './detail-view/detail-view.component';
 
 // Define the routes
@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     BasicViewComponent,
-    wobiFormComponent,
+    WobiFormComponent,
     DetailViewComponent
   ],
   imports: [
