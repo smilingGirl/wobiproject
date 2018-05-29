@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 // Import the Schema for World, Country, Character, Culture
 import { World, Country, Character, Culture } from '../model/schema';
@@ -9,6 +10,7 @@ import { WorldService } from '../services/world.service';
 import { CharacterService } from '../services/character.service';
 import { CultureService } from '../services/culture.service';
 import { CountryService } from '../services/country.service';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-wobi-form',
@@ -31,7 +33,7 @@ export class WobiFormComponent implements OnInit {
   // Form variables
   wobiForm: FormGroup;
   name = new FormControl('', Validators.required);
-  fname: string = '';
+  lname: string = '';
   age: number;
   country: string = '';
   culture: string = '';
@@ -45,27 +47,28 @@ export class WobiFormComponent implements OnInit {
     public ngxSmartModalService: NgxSmartModalService,
     private _charaService: CharacterService,
     private _cultService: CultureService,
-    private _countSevice: CountryService
+    private _countSevice: CountryService,
+    private toastr: ToastrService,
+    private _sharedService: SharedService
   ) {
     this.wobiForm = new FormGroup({
       'name': this.name,
       country: new FormControl(),
       culture: new FormControl(),
-      fname: new FormControl(),
+      lname: new FormControl(),
       age: new FormControl(),
-      status: new FormControl(),
+      status: new FormControl(Validators.required),
       system: new FormControl(),
       wip: new FormControl(Validators.required)
     });
+    this._sharedService.changeEntityTypeEmitted$.subscribe( value => {
+      this._selectedInputCharacteristic = value;
+    });
   }
 
-  @Input() set selectedInputCharacteristic(value: string) {
-    this._selectedInputCharacteristic = value;
-  }
   @Input() set selectedWorldId(value: number) {
     this._selectedWorldId = value;
   }
-  @Output() newWorld = new EventEmitter<World>();
   @Output() newCharacter = new EventEmitter<Character>();
   @Output() newCulture = new EventEmitter<Culture>();
   @Output() newCountry = new EventEmitter<Country>();
@@ -81,10 +84,12 @@ export class WobiFormComponent implements OnInit {
       this.createWorld(this.wobiForm.value.name, this.wobiForm.value.wip);
     } else if (this._selectedInputCharacteristic  === 'character') {
       this.createCharacter(
-        this.wobiForm.value.fname,
         this.wobiForm.value.name,
+        this.wobiForm.value.lname,
         this.wobiForm.value.age,
         this.wobiForm.value.status,
+        this.wobiForm.value.culture,
+        this.wobiForm.value.country,
         this._selectedWorldId
       );
     } else if (this._selectedInputCharacteristic === 'culture') {
@@ -101,28 +106,32 @@ export class WobiFormComponent implements OnInit {
   private createWorld(name, wip) {
     const newW = <World>{};
     newW.name = name;
-    if (wip !== true) {wip = false; }
+    if (wip !== false) {wip = true; }
     newW.WorkInProgress = wip;
 
     this._dataService.createWorld(newW).subscribe(data => {
-      this.newWorld.emit(data);
+      this._sharedService.emitWorldChange(data);
     }, error => {
-      alert('Failed creating a new world');
+      this.toastr.error('Failed creating a new world!', 'Error');
     });
   }
 
-  private createCharacter(firstname, lastname, age, status, worldID) {
+  private createCharacter(firstname, lastname, age, status, culture, country, worldID) {
     const newC = <Character>{};
     newC.lastName = lastname;
     newC.firstName = firstname;
-    newC.age = age;
+    if (age !== null && typeof age !== 'undefined') {newC.age = age; }
+    if (culture !== null && typeof culture !== 'undefined') {newC.culture = culture; }
+    if (country !== null && typeof country !== 'undefined') {newC.country = country; }
     newC.status = status;
     newC.worldID = worldID;
-
+    console.log(newC);
+    console.log(typeof newC.culture.type);
     this._charaService.createCharacter(newC).subscribe(data => {
       this.newCharacter.emit(data);
+      this.toastr.success('Succesfully create a new character!', 'Created!');
     }, error => {
-      alert('Failed creating a new character');
+      this.toastr.error('Failed creating a new character!', 'Error');
     });
   }
 
@@ -134,8 +143,9 @@ export class WobiFormComponent implements OnInit {
 
     this._countSevice.createCountry(newC).subscribe(data => {
       this.newCountry.emit(data);
+      this.toastr.success('Succesfully create a new country!', 'Created!');
     }, error => {
-      alert('Failed creating a new country');
+      this.toastr.error('Failed creating a new country!', 'Error');
     });
   }
 
@@ -146,8 +156,9 @@ export class WobiFormComponent implements OnInit {
 
     this._cultService.createCulture(newC).subscribe(data => {
       this.newCulture.emit(data);
+      this.toastr.success('Succesfully create a new culture!', 'Created!');
     }, error => {
-      alert('Failed creating a new culture');
+      this.toastr.error('Failed creating a new culture!', 'Error');
     });
   }
 
@@ -156,7 +167,7 @@ export class WobiFormComponent implements OnInit {
     this._cultService.fetchCultureEntries(worldID).subscribe(data => {
       this.cultures = data;
     }, error => {
-      alert('Failed fetching cultures');
+      this.toastr.error('Failed fetching cultures!', 'Error');
     });
   }
 
@@ -164,7 +175,7 @@ export class WobiFormComponent implements OnInit {
     this._countSevice.fetchCountryEntries(worldID).subscribe(data => {
       this.countries = data;
     }, error => {
-      alert('Failed fetching countries');
+      this.toastr.error('Failed fetching countries!', 'Error');
     });
   }
 }

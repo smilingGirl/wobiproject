@@ -10,7 +10,7 @@ const httpOptions = {
 @Injectable()
 export class CharacterService {
 
-  private webServiceUrl = 'http://localhost:8080/';
+  private webServiceUrl = 'http://localhost:8080/worlds/';
   private branchUrl = '/characters/';
 
   constructor(private http: HttpClient) { }

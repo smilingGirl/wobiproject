@@ -4,20 +4,20 @@ var schema = require('../schema.js');
 var log = require('fancy-log');
 
 function init(app, cs) {
-  app.get('/:worldID/characters', getCharacters);
-  log.info(`*** API [GET] /:world/characters registered`);
+  app.get('/worlds/:worldID/characters', getCharacters);
+  log.info(`*** API [GET] worlds/:world/characters registered`);
 
-  app.post('/:worldID/characters', validate({ body: schema.Character }), postCharacter);
-  log.info(`*** API [POST] /:world/characters registered`);
+  app.post('/worlds/:worldID/characters', validate({ body: schema.Character }), postCharacter);
+  log.info(`*** API [POST] worlds/:world/characters registered`);
 
-  app.put('/:worldID/characters/:characterID', validate({ body: schema.Character }), putCharacter);
-  log.info(`*** API [PUT] /:world/characters/:characterID registered`);
+  app.put('/worlds/:worldID/characters/:characterID', validate({ body: schema.Character }), putCharacter);
+  log.info(`*** API [PUT] worlds/:world/characters/:characterID registered`);
 
-  app.delete('/:worldID/characters/:characterID', deleteCharacter);
-  log.info(`*** API [DELETE] /:world/characters/:characterID registered`);
+  app.delete('/worlds/:worldID/characters/:characterID', deleteCharacter);
+  log.info(`*** API [DELETE] worlds/:world/characters/:characterID registered`);
 
-  app.get('/:worldID/characters/:characterID', getCharacterById);
-  log.info(`*** API [GET] /:world/characters/:characterID registered`);
+  app.get('/worlds/:worldID/characters/:characterID', getCharacterById);
+  log.info(`*** API [GET] worlds/:world/characters/:characterID registered`);
 }
 
 function getCharacters(req, res) {
@@ -52,7 +52,8 @@ function putCharacter(req, res) {
 		type: 'character',
 		status: req.body.status, 
 		worldId: req.body.worldID,
-		culture: req.body.culture, 
+		culture: req.body.culture,
+		country: req.body.country, 
 	};
 	cs.updateCharacter(req.params.worldID, req.params.characterID, character)
 	.then(function (character) {
@@ -73,7 +74,8 @@ function postCharacter(req, res) {
 		type: 'character',
 		status: req.body.status,
 		worldId: req.body.worldID,
-		culture: req.body.culture, 
+		culture: req.body.culture,
+		country: req.body.country, 
 	};
 	cs.addCharacter(req.params.worldID, character)
 	.then(function (character) {

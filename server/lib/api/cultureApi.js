@@ -4,12 +4,12 @@ var schema = require('../schema.js');
 var log = require('fancy-log');
 
 function init(app, ws) {
-  app.get('/:worldID/cultures', getCultures);
-  log.info(`*** API [GET] /:world/cultures registered`);
-  app.post('/:worldID/cultures', validate({ body: schema.Culture }), postCultures);
-  log.info(`*** API [POST] /:world/cultures registered`);
-  app.get('/:worldID/cultures/:cultureID', getCultureById);
-  log.info(`*** API [GET] /:world/cultures/:cultureID registered`);
+  app.get('/worlds/:worldID/cultures', getCultures);
+  log.info(`*** API [GET] worlds/:world/cultures registered`);
+  app.post('/worlds/:worldID/cultures', validate({ body: schema.Culture }), postCultures);
+  log.info(`*** API [POST] worlds/:world/cultures registered`);
+  app.get('/worlds/:worldID/cultures/:cultureID', getCultureById);
+  log.info(`*** API [GET] worlds/:world/cultures/:cultureID registered`);
 }
 
 function getCultures(req, res) {

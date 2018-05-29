@@ -4,12 +4,12 @@ var schema = require('../schema.js');
 var log = require('fancy-log');
 
 function init(app, ws) {
-  app.get('/:worldID/countries', getCountries);
-  log.info(`*** API [GET] /:world/countries registered`);
-  app.post('/:worldID/countries', validate({ body: schema.Country }), postCountry);
-  log.info(`*** API [POST] /:world/countries registered`);
-  app.get('/:worldID/countries/:countryID', getCountryById);
-  log.info(`*** API [GET] /:world/countries/:countryID registered`);
+  app.get('/worlds/:worldID/countries', getCountries);
+  log.info(`*** API [GET] worlds/:world/countries registered`);
+  app.post('/worlds/:worldID/countries', validate({ body: schema.Country }), postCountry);
+  log.info(`*** API [POST] worlds/:world/countries registered`);
+  app.get('/worlds/:worldID/countries/:countryID', getCountryById);
+  log.info(`*** API [GET] worlds/:world/countries/:countryID registered`);
 }
 
 function getCountries(req, res) {

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ToastrService } from 'ngx-toastr';
 
 import { WorldService } from '../services/world.service';
+import { SharedService } from '../services/shared.service';
 
 import { World, Character} from '../model/schema';
 
@@ -13,16 +15,30 @@ import { World, Character} from '../model/schema';
 })
 
 export class BasicViewComponent implements OnInit {
-  selectedInputCharacteristic;
-
   worlds: World[];
   world: World;
   selectedWorldId;
 
   constructor(
     private _dataService: WorldService,
-    public ngxSmartModalService: NgxSmartModalService
-  ) {}
+    public ngxSmartModalService: NgxSmartModalService,
+    private toastr: ToastrService,
+    private _sharedService: SharedService
+  ) {
+    this._sharedService.changeEmitted$.subscribe( id => {
+      console.log(id);
+      for (let i = 0; i < this.worlds.length; i++) {
+        if (this.worlds[i]._id.toString() === id.toString()) {
+          this.worlds.splice(i, 1);
+          this.selectedWorldId = null;
+          this.toastr.success('Succesfully deleted this world!', 'Deleted World!');
+        }
+      }
+    });
+    this._sharedService.changeWorldEmitted$.subscribe( newW => {
+      this.onNewWorld(newW);
+    });
+  }
 
   ngOnInit(): void {
     this.loadWorlds();
@@ -32,7 +48,7 @@ export class BasicViewComponent implements OnInit {
     this._dataService.fetchWorldEntries().subscribe(data => {
       this.worlds = data;
     }, error => {
-      alert('Failed fetching worlds');
+      this.toastr.error('Failed fetching worlds!', 'Error');
     });
   }
 
@@ -41,18 +57,19 @@ export class BasicViewComponent implements OnInit {
       this.world = data;
       this.selectedWorldId = data._id;
     }, error => {
-      alert('Failed fetching this world');
+      this.toastr.error('Failed fetching this world!', 'Error');
     });
   }
 
   private newWorld() {
-    this.selectedInputCharacteristic = 'world';
+    this._sharedService.emitEntitiyChange('world');
     this.ngxSmartModalService.getModal('newFormModal').open();
   }
 
   // Event handler for new World created
   onNewWorld(newWorld: World) {
     this.worlds.push(newWorld);
+    this.toastr.success('Succesfully added a new world!', 'New World!');
   }
 
   // Event handler for World deleted
@@ -61,8 +78,19 @@ export class BasicViewComponent implements OnInit {
       if (this.worlds[i]._id === worldID) {
         this.worlds.splice(i, 1);
         this.selectedWorldId = null;
+        this.toastr.success('Succesfully deleted this world!', 'Deleted World!');
       }
     }
   }
+
+/* Set the width of the side navigation to 250px */
+private openNav() {
+  document.getElementById('mySidenav').style.width = '250px';
+}
+
+/* Set the width of the side navigation to 0 */
+private closeNav() {
+  document.getElementById('mySidenav').style.width = '0';
+}
 }
 

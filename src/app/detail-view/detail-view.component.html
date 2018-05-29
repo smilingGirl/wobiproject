@@ -5,16 +5,16 @@
     <nav class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#" [routerLink]="['/worlds']" routerLinkActive="active-link" (click)="loadWorld(_selectedWorldId)">Info</a>
+          <a class="nav-link" routerLinkActive="active-link" (click)="loadWorld(_selectedWorldId)">Info</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="[_selectedWorldId, 'characters']" routerLinkActive="active-link" (click)="loadCharacters(_selectedWorldId)">Character</a>
+          <a class="nav-link" routerLinkActive="active-link" (click)="loadEntity('character',_selectedWorldId)">Character</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="[_selectedWorldId, 'cultures']" routerLinkActive="active-link" (click)="loadCultures(_selectedWorldId)">Cultures</a>
+          <a class="nav-link" (click)="loadEntity('culture',_selectedWorldId)">Cultures</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="[_selectedWorldId, 'countries']" routerLinkActive="active-link" (click)="loadCountries(_selectedWorldId)">Countries</a>
+          <a class="nav-link"  routerLinkActive="active-link" (click)="loadEntity('country',_selectedWorldId)">Countries</a>
         </li>
       </ul>
     </nav>
@@ -35,21 +35,21 @@
           <div *ngIf="selectedInputCharacteristic == 'character'">
             <ng-container *ngFor="let character of characters">
               <li class="list-group-item">
-                <a class="" href="#" [routerLink]="[_selectedWorldId, 'characters', character._id]" (click)="loadCharacter(_selectedWorldId,character._id)">{{character.firstName}}</a>
+                <a (click)="loadCharacter(_selectedWorldId,character._id)">{{character.firstName}}</a>
               </li>
             </ng-container>
           </div>
           <div *ngIf="selectedInputCharacteristic == 'country'">
             <ng-container *ngFor="let country of countries">
               <li class="list-group-item">
-                <a class="" href="#" [routerLink]="[_selectedWorldId, 'countries', country._id]" (click)="loadCountry(_selectedWorldId,country._id)">{{country.name}}</a>
+                <a (click)="loadCountry(_selectedWorldId,country._id)">{{country.name}}</a>
               </li>
             </ng-container>
           </div>
           <div *ngIf="selectedInputCharacteristic == 'culture'">
             <ng-container *ngFor="let culture of cultures">
               <li class="list-group-item">
-                <a class="" href="#" [routerLink]="[_selectedWorldId, 'cultures', culture._id]" (click)="loadCulture(_selectedWorldId,culture._id)">{{culture.name}}</a>
+                <a (click)="loadCulture(_selectedWorldId,culture._id)">{{culture.name}}</a>
               </li>
             </ng-container>
           </div>
@@ -132,8 +132,24 @@
                 </tr>
                 <tr>
                   <th scope="row">Culture</th>
-                  <td>{{character.culture}}</td>
+                  <td *ngIf="!editMode">{{character.culture}}</td>
+                  <td *ngIf="editMode">
+                      <select class="form-control" id="culture" formControlName="culture">
+                          <option></option>
+                          <option *ngFor="let culture of cultures" value="{{culture.name}}">{{culture.name}}</option>
+                        </select>
+                      </td>
                 </tr>
+                <tr>
+                    <th scope="row">Country</th>
+                    <td *ngIf="!editMode">{{character.country}}</td>
+                    <td *ngIf="editMode">
+                        <select class="form-control" id="country" formControlName="country">
+                            <option></option>
+                            <option *ngFor="let country of countries" value="{{country.name}}">{{country.name}}</option>
+                          </select>
+                        </td>
+                  </tr>
                 <tr>
                   <th scope="row">Status</th>
                   <td *ngIf="!editMode">{{character.status}}</td>
@@ -148,7 +164,7 @@
             </tbody>
           </table>
           <div></div>
-          <div class="container text-right" *ngIf="selectedInputCharacteristic == 'character' || selectedInputCharacteristic == 'world' && detailViewActivated">
+          <div class="container text-right" *ngIf="(selectedInputCharacteristic == 'character' || selectedInputCharacteristic == 'world') && detailViewActivated">
             <button *ngIf="selectedInputCharacteristic == 'character'" type="button" class="btn btn-danger btn-sm" (click)="deleteCharacter(_selectedWorldId,character._id)">Delete</button>
             <button *ngIf="selectedInputCharacteristic == 'world'"type="button" class="btn btn-danger btn-sm" [routerLink]="['/']" (click)="deleteWorld(_selectedWorldId)">Delete world</button>
             <button *ngIf="!editMode" type="button" class="btn btn-light btn-sm" (click)='editModeStart()'>Edit</button>
@@ -162,4 +178,4 @@
 
   </div>
 </div>
-<app-wobi-form [selectedWorldId]='_selectedWorldId' [selectedInputCharacteristic]='selectedInputCharacteristic' (newCountry)="onNewCountry($event)" (newCharacter)="onNewCharacter($event)" (newCulture)="onNewCulture($event)"></app-wobi-form>
+<app-wobi-form [selectedWorldId]='_selectedWorldId' (newCountry)="onNewCountry($event)" (newCharacter)="onNewCharacter($event)" (newCulture)="onNewCulture($event)"></app-wobi-form>

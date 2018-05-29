@@ -61,7 +61,10 @@ schemas.Character = {
         maxLength: 3,
       },
       culture: {
-        type: "number",
+        type: "string",
+      },
+      country: {
+          type: "string",
       },
       status: {
         type: 'string',

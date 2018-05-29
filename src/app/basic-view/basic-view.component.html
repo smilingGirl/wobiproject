@@ -1,15 +1,11 @@
 <!--Top navigation-->
 <nav class="navbar navbar-expand-md navbar-inverse bg-inverse">
+  <a (click)="openNav()" id="world-select-open">&#9776; </a>
   <a class="navbar-brand" href="#">WoBi</a>
   <div class="collapse navbar-collapse" id="navbarst">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Settings</a>
+        <a class="nav-link" href="#">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Help</a>
@@ -17,18 +13,24 @@
     </ul>
   </div>
 </nav>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a class="nav-link" (click)="newWorld()">New World</a>
+  <ul *ngFor="let world of worlds">
+    <a class="nav-link" [routerLink]="['worlds/', world._id]" routerLinkActive="active-tab" (click)="loadWorld(world._id)">{{world.name}}</a>
+  </ul>
+</div>
 
-<div class="row">
+<div class="row" id="world-select-tabs">
   <div class="nav-item" id="createNewWorldControl">
-      <a class="nav-link" href="#"  [routerLink]="['/worlds']" (click)="newWorld()">New World</a>
+    <a class="nav-link" (click)="newWorld()">New World</a>
   </div>
   <ul class="nav nav-tabs" *ngFor="let world of worlds">
     <li class="nav-item">
-      <a class="nav-link" href="#" [routerLink]="['worlds', world._id]" routerLinkActive="active-link" (click)="loadWorld(world._id)">{{world.name}}</a>
+      <a class="nav-link" [routerLink]="['worlds/', world._id]" routerLinkActive="active-tab" (click)="loadWorld(world._id)">{{world.name}}</a>
     </li>
   </ul>
 </div>
 
-<app-detail-view [selectedWorldId]='selectedWorldId' *ngIf="selectedWorldId" (deletedWorld)="onDeletedWorld($event)">
-</app-detail-view>
-<app-wobi-form [selectedInputCharacteristic]='selectedInputCharacteristic' (newWorld)="onNewWorld($event)"></app-wobi-form>
+<app-wobi-form ></app-wobi-form>
+<router-outlet></router-outlet>
