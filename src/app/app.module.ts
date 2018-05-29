@@ -15,10 +15,11 @@ import { WobiFormComponent } from './wobi-new-form/wobi-new-form.component';
 import { DetailViewComponent } from './detail-view/detail-view.component';
 
 import { SharedService } from './services/shared.service';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 
 // Define the routes
 const appRoutes: Routes = [
-  { path: 'worlds/:id', component: DetailViewComponent}
+  { path: 'worlds/:id/info', component: DetailViewComponent}
 ];
 
 
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     AppComponent,
     BasicViewComponent,
     WobiFormComponent,
-    DetailViewComponent
+    DetailViewComponent,
+    HelpDialogComponent
   ],
   imports: [
     RouterModule.forRoot(

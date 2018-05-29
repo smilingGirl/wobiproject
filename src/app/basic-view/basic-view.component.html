@@ -5,10 +5,10 @@
   <div class="collapse navbar-collapse" id="navbarst">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Help</a>
+        <a class="nav-link" (click)="ngxSmartModalService.getModal('helpDialog').open()">Help</a>
       </li>
     </ul>
   </div>
@@ -17,7 +17,7 @@
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
   <a class="nav-link" (click)="newWorld()">New World</a>
   <ul *ngFor="let world of worlds">
-    <a class="nav-link" [routerLink]="['worlds/', world._id]" routerLinkActive="active-tab" (click)="loadWorld(world._id)">{{world.name}}</a>
+    <a class="nav-link" [routerLink]="['worlds/', world._id, 'info']" routerLinkActive="active-tab" (click)="loadWorld(world._id)">{{world.name}}</a>
   </ul>
 </div>
 
@@ -27,10 +27,11 @@
   </div>
   <ul class="nav nav-tabs" *ngFor="let world of worlds">
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['worlds/', world._id]" routerLinkActive="active-tab" (click)="loadWorld(world._id)">{{world.name}}</a>
+      <a class="nav-link" [routerLink]="['worlds/', world._id, 'info']" routerLinkActive="active-tab" (click)="loadWorld(world._id)">{{world.name}}</a>
     </li>
   </ul>
 </div>
 
 <app-wobi-form ></app-wobi-form>
+<app-help-dialog ></app-help-dialog>
 <router-outlet></router-outlet>
