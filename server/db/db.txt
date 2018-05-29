@@ -1,0 +1,2 @@
+This is where your db lives. The prupose of this document is to make sure the folder ain't empty while you have no db yet.
+It's a GitHub thing, don't worry about it and create your db.
